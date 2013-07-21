@@ -4,7 +4,7 @@
 Please don't edit files in the `dist` subdirectory as they are generated via Grunt. You'll find source code in the `src` subdirectory!
 
 ### Code style
-Regarding code style like indentation and whitespace, **follow the conventions you see used in the source already.**
+Regarding code style like indentation and whitespace, **follow the conventions you see used in the source already (tabs).**
 
 ### PhantomJS
 While Grunt can run the included unit tests via [PhantomJS](http://phantomjs.org/), this shouldn't be considered a substitute for the real thing. Please be sure to test the `test/*.html` unit test file(s) in _actual_ browsers.

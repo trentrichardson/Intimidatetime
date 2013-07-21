@@ -2,6 +2,8 @@
 
 A wicked good date time picker for jQuery and Zepto
 
+Intimidatetime is not yet ready for use, but check back soon!
+
 ## Getting Started
 Download the [production version][min] or the [development version][max].
 
@@ -15,7 +17,7 @@ In your web page:
 <script src="dist/Intimidatetime.min.js"></script>
 <script>
 jQuery(function($) {
-  $.awesome(); // "awesome"
+	$('.myInputs').intimidatetime();
 });
 </script>
 ```

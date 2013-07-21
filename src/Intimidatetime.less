@@ -1,0 +1,121 @@
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*	Settings
+*/
+@background-color: #fff;
+@border: solid 2px #e4e4e4;
+@shadowX: 0;
+@shadowY: 0;
+@shadowBlur: 8px;
+@shadowColor: #ddd;
+@border-radius: 4px;
+
+@font-family: "Gill Sans", "Gill Sans MT", Calibri, sans-serif;
+@font-size: 12px;
+@font-color: #555;
+@line-height: 18px;
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*	Mixins
+*/
+// Font Sizes (REMs with PX fallback for older browsers)
+.font-size (@sizeValue) {
+	@remValue: @sizeValue / 16;
+	@pxValue: (@sizeValue);
+	font-size: ~"@{pxValue}px"; 
+	font-size: ~"@{remValue}rem";
+}
+
+// Line Height Sizes (REMs with PX fallback for older browsers)
+.line-height (@sizeValue) {
+	@remValue: @sizeValue / 16;
+	@pxValue: (@sizeValue);
+	line-height: ~"@{pxValue}px"; 
+	line-height: ~"@{remValue}rem";
+}
+
+// Box shadow
+.box-shadow(@x, @y, @blur, @color){
+	-webkit-box-shadow: @arguments;
+	-moz-box-shadow: @arguments;
+	-ms-box-shadow: @arguments;
+	-o-box-shadow: @arguments;
+	box-shadow: @arguments;
+}
+
+// border-radius
+.border-radius(@radius: 1px){
+	-webkit-border-radius: @radius;
+	-moz-border-radius: @radius;
+	-ms-border-radius: @radius;
+	-o-border-radius: @radius;
+	border-radius: @radius;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box; 
+}
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*	Base container
+*/
+.intimidatetime{
+	position: absolute;
+	z-index: 9999;
+
+	font-family: @font-family;
+	.font-size(@font-size);
+	.line-height(@line-height); 
+	background-color: @background-color;
+	border: @border;
+	.border-radius(4px);
+	.box-shadow(@shadowX, @shadowY, @shadowBlur, @shadowColor);
+
+	&:after{
+		clear: both;
+	}
+	&.intimidatetime-inline{
+		position: static;
+	}
+
+	// buttons
+	.intimidatetime-buttons{
+		padding: 10px;
+	}
+	.intimidatetime-buttons button{
+		margin: 0 15px 0 0;
+	}
+	.intimidatetime-buttons:before{
+		clear:both;	
+	}
+	.intimidatetime-buttons:after{
+		clear:both;	
+	}
+}
+
+
+/* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+*	MODE: basic
+*/
+.intimidatetime-mode-basic{
+	width: 250px;
+
+	.intimidatetime-range{
+		border-bottom: solid 1px #e4e4e4;
+
+		.intimidatetime-preview{
+			text-align: center;
+			padding: 10px 0;
+		}
+		.intimidatetime-group{
+			padding: 5px 10px;
+
+			.intimidatetime-unit{
+				display: inline-block;
+				width: 33%;
+
+				span{
+					display: block;
+				}
+			} // end unit
+		} // end group
+	} // end range
+} // end basic

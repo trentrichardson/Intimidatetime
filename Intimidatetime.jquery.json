@@ -1,0 +1,27 @@
+{
+	"name": "Intimidatetime",
+	"title": "Intimidatetime",
+	"description": "A wicked good date time picker for jQuery and Zepto",
+	"version": "0.1.0",
+	"homepage": "http://trentrichardson.com/examples/Intimidatetime",
+	"author": {
+		"name": "Trent Richardson",
+		"email": "trentdrichardson@gmail.com",
+		"url": "http://trentrichardson.com"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/trentrichardson/Intimidatetime.git"
+	},
+	"bugs": "https://github.com/trentrichardson/Intimidatetime/issues",
+	"licenses": [
+		{
+			"type": "MIT",
+			"url": "thttp://trentrichardson.com/examples/Intimidatetime/blob/master/LICENSE-MIT"
+		}
+	],
+	"dependencies": {
+		"jquery": "*"
+	},
+	"keywords": []
+}

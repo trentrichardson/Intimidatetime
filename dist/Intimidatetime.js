@@ -1,4 +1,4 @@
-/*! Intimidatetime - v0.1.0 - 2013-06-28
+/*! Intimidatetime - v0.1.0 - 2013-07-23
 * http://trentrichardson.com/examples/Intimidatetime
 * Copyright (c) 2013 Trent Richardson; Licensed MIT */
 /*jslint white: true, undef: false, nomen: true */
@@ -7,6 +7,7 @@
 
 	/*
 		Notes:
+		- inst.settings.value is an array of js Date objects, we always act as if it is a range
 		- http://about.me/jdunck 
 			click the Github link, modal pops up would be nice to 
 			have the title bar with Year dropdown, then list of months
@@ -58,7 +59,7 @@
 			}
 
 			// picker format defaults to format for input field
-			s.pickerFormat = s.pickerFormat || s.format;
+			s.previewFormat = s.previewFormat || s.format;
 
 
 			// find all our elements
@@ -70,7 +71,7 @@
 			// compute the default value
 			k = this.$el.val();
 			if(k !== undefined && k !== ''){
-				s.value = $.intimidatetime.dateRangeParse(k, s.format, s);
+				s.value = $.intimidatetime.dateRangeParse(k, s.format, s.rangeDelimiter, s);
 			}
 			if(s.value === null){
 				s.value = [new Date(d.getTime())];
@@ -109,10 +110,10 @@
 				
 				// show or hide it
 				if(inst.settings.inline){
-					inst.$p.show();
+					inst.open();
 				}
 				else{
-					inst.$el.on('focus.intimidatetime', function(e){ inst.$p.show(); });
+					inst.$el.on('focus.intimidatetime', function(e){ inst.open(); });
 
 					inst.$d.on('click.intimidatetime', function(e){
 						var target = e.target;
@@ -153,6 +154,22 @@
 		* Destroy the object, removes everything
 		* @return jQuery - the manager object
 		*/
+		open: function(){
+			var inst = this,
+				e = new $.Event('intimidatetime:open'),
+				result = inst.$el.trigger(e, [inst]);
+
+				if(result.isDefaultPrevented === undefined || !result.isDefaultPrevented()){
+					inst.$p.show();
+				}
+				
+				return inst.$el;
+			},
+
+		/* 
+		* Destroy the object, removes everything
+		* @return jQuery - the manager object
+		*/
 		close: function(){
 			var inst = this,
 				e = new $.Event('intimidatetime:close'),
@@ -179,6 +196,30 @@
 					return this.$el;
 				}
 				return s[key];
+			},
+
+		/* 
+		* set/get value
+		* @param val string - the value to assign
+		* @return mixed - jQuery when setting value, option value when getting
+		*/
+		value: function(val){
+				var inst = this,
+					s = inst.settings;
+
+				if(val !== undefined){
+					s.value = $.isArray(val)? val : [val];
+
+					// validate it is within range settings
+					inst._validateRanges();
+
+					// update the input and picker
+					inst.$el.val($.intimidatetime.dateRangeFormat(s.value, s.format, s.rangeDelimiter, s));
+					inst._updatePickerRanges();
+
+					return inst.$el;
+				}
+				return s.value.length === 1? s.value[0] : s.value;
 			},
 
 		/* 
@@ -217,7 +258,7 @@
 				// create a set for each datetime in a range
 				inst.$p.empty();
 				for(i=0; i<=s.ranges; i+=1){
-					$h = $('<div class="'+s.theme+'-range '+s.theme+'-range-'+i+'"><div class="'+s.theme+'-preview">'+ $.intimidatetime.dateFormat(s.value[i], s.pickerFormat, s) +'</div></div>').appendTo(inst.$p);
+					$h = $('<div class="'+s.theme+'-range '+s.theme+'-range-'+i+'"><div class="'+s.theme+'-preview">'+ $.intimidatetime.dateFormat(s.value[i], s.previewFormat, s) +'</div></div>').appendTo(inst.$p);
 
 					// build out the defined groups
 					for(g=0,gl=s.groups.length; g<gl; g+=1){
@@ -269,7 +310,7 @@
 					elpos = inst.$el.position(),
 					outerSize = function($el){
 							return {
-								w: ($el.height() + $el.css('padding-left') + $el.css('padding-right') + $el.css('border-left-width') + $el.css('border-right-width')),
+								w: ($el.width() + $el.css('padding-left') + $el.css('padding-right') + $el.css('border-left-width') + $el.css('border-right-width')),
 								h: ($el.height() + $el.css('padding-top') + $el.css('padding-bottom') + $el.css('border-top-width') + $el.css('border-bottom-width'))
 							};
 						},
@@ -300,16 +341,126 @@
 		* the change event has occured on an input, update everything
 		* @return jQuery - the manager object
 		*/
-		_change: function(){
+		_change: function(e){
 				var inst = this,
-					e = new $.Event('intimidatetime:change'),
-					result = inst.$el.trigger(e, [inst]);
+					s =  inst.settings,
+					ranges = inst._collectPickerRanges(),
+					eCustom = new $.Event('intimidatetime:change'),
+					eResult = inst.$el.trigger(eCustom, [inst, ranges]);
 
-				if(result.isDefaultPrevented()){
+				// do all user supplied event handlers accept the event? (Zepto may not implement this)
+				if(eResult.isDefaultPrevented && eResult.isDefaultPrevented()){
+					e.preventDefault(); // the original html event
 					return false;
 				}
 
+				// set the new value (validation happens in value())
+				inst.value(ranges);
 				return this.$el;
+			},
+
+		/* 
+		* Validate the range as per settings, min, max, intervalMin, intervalMax
+		* @return array - array of dates (date range)
+		*/
+		_validateRanges: function(){
+				var inst = this,
+					s = inst.settings,
+					l = $.isArray(s.value)? s.value.length : 0,
+					mind, maxd,i,cd;
+
+				if(l > 0){
+					mind = (typeof s.min === 'string')? $.intimidatetime.dateRelative(new Date(), s.min) : s.min;
+					maxd = (typeof s.max === 'string')? $.intimidatetime.dateRelative(new Date(), s.max) : s.max;
+
+					// restrict min/max
+					for(i=0; i<l; i++){
+						if(mind && s.value[i] < mind){ // restrict min
+							s.value[i] = mind;
+						}
+						else if(maxd && s.value[i] > maxd){ // restrict max
+							s.value[i] = maxd;
+						}
+
+						if(i > 0){ // restrict interval
+							if(typeof s.rangeIntervalMin === 'string'){
+								cd = $.intimidatetime.dateRelative(s.value[i-1], s.rangeIntervalMin);
+								if(s.value[i] < cd){
+									s.value[i] = cd;
+								}
+							}
+							if(typeof s.rangeIntervalMax === 'string'){
+								cd = $.intimidatetime.dateRelative(s.value[i-1], s.rangeIntervalMax);
+								if(s.value[i] > cd){
+									s.value[i] = cd;
+								}
+							}
+						}
+					}// for i->l
+				}// l > 0
+
+				return inst;
+			},
+
+		/* 
+		* Search the picker for all dates/ranges, return them
+		* @return array - array of Dates (date range)
+		*/
+		_collectPickerRanges: function(){
+				var inst = this,
+					s = inst.settings,
+					range = [],
+					defVals = {year:0, month:0, day:0, hour:0, minute:0, second:0, millisecond:0, microsecond:0};
+
+				// get each range
+				inst.$p.children('.'+s.theme+'-range').each(function(i, el){
+					var $r = $(el),
+						v = $.extend({}, defVals),
+						d;
+					
+					// get each unit in the range
+					$r.find('.'+s.theme+'-unit').each(function(j, uel){
+						var $u = $(uel),
+							unit = $u.data('unit');
+						v[unit] = $.intimidatetime.types[s.units[unit].type].value(inst, $u);
+					});
+
+					// create the new date
+					d = new Date(v.year, v.month, v.day, v.hour, v.minute, v.second, v.millisecond);
+					d.setMicroseconds(v.microsecond);
+					if(v.timezone !== undefined){
+						d.setTimezone(v.timezone);
+					}
+					range[i] = d;
+				});
+
+				return range;
+			},
+		
+		/* 
+		* update picker input values and previewFormat, called from this.value()
+		* @return jQuery - the manager object
+		*/
+		_updatePickerRanges: function(){
+				var inst = this,
+					s = inst.settings;
+
+				// get each range
+				inst.$p.children('.'+s.theme+'-range').each(function(i, el){
+					var $r = $(el),
+						d = s.value[i]; // the date in the range
+					
+					// set each unit in the range
+					$r.find('.'+s.theme+'-unit').each(function(j, uel){
+						var $u = $(uel),
+							unit = $u.data('unit');
+						$.intimidatetime.types[s.units[unit].type].value(inst, $u, d['get'+s.units[unit].map]());
+					});
+
+					// update the preview in the picker
+					$r.children('.'+s.theme+'-preview').text($.intimidatetime.dateFormat(d, s.previewFormat, s));
+				});
+				return inst.$el;
 			}
 
 	});
@@ -378,7 +529,7 @@
 			value: null,
 
 			// picker time format
-			pickerFormat: null,
+			previewFormat: null,
 
 			// format shown in the alt field if used, defaults to format option
 			altFormat: null,
@@ -397,6 +548,12 @@
 
 			// string to delimit ranges. this string MUST NOT occur in the time format
 			rangeDelimiter: ' - ',
+
+			// relative date string for the minimum allowed difference between two dates
+			rangeIntervalMin: '+0l',
+
+			// relative date string for the maximum allowed difference between two dates
+			rangeIntervalMax: null,
 
 			// number of months to show at once
 			months: 1,
@@ -444,13 +601,16 @@
 				// event fired on value change request, use event.preventDefault() or return false to prevent value change
 				change: function(e, date, inst){},
 
-				// event
+				// event fired when the picker is (re)built
 				refresh: function(e, inst){},
 
 				// event fired to validate a day, use event.preventDefault() or return false to disable the day
 				enableDay: function(e, date, inst){},
 
-				// event
+				// event fired when the picker is opened, use event.preventDefault() or return false to prevent opening
+				open: function(e, inst){},
+
+				// event fired when the picker is closed, use event.preventDefault() or return false to prevent closing
 				close: function(e, inst){}
 			}
 		},
@@ -506,10 +666,10 @@
 
 						$parent.html(h);
 					},
-					option: function(inst, unit, key, val){
+					option: function(inst, $parent, key, val){
 
 					},
-					value: function(inst, unit, val){
+					value: function(inst, $parent, val){
 
 					}
 				},
@@ -519,10 +679,10 @@
 					create: function(inst, $parent, date, onChange){
 						window.console.log('create list');
 					},
-					option: function(inst, unit, key, val){
+					option: function(inst, $parent, key, val){
 
 					},
-					value: function(inst, unit, val){
+					value: function(inst, $parent, val){
 
 					}
 				},
@@ -571,13 +731,23 @@
 
 						// append it all to the parent
 						$input.html(h).val(val);
+						$input.on('change.intimidatetime', function(e){ // select change event triggers the change
+							inst._change.call(inst, e);
+						});
 						$label.append($input).appendTo($parent);
 					},
-					option: function(inst, unit, key, val){
-
+					option: function(inst, $parent, key, val){
+						// just set the value in options and recreate it?
+						// be beware in ranges setting the global options 
+						// this could step on other date settings toes...
 					},
-					value: function(inst, unit, val){
-
+					value: function(inst, $parent, val){
+						var $sel = $parent.find('select');
+						if(val !== undefined){
+							$sel.val(val);
+							return $parent;
+						}
+						return $sel.val();
 					}
 				}
 				// select, label, calendar, ui slider
@@ -766,14 +936,14 @@
 		* @return Date
 		*/
 		dateRangeParse: function(dates, format, delimiter, options){
-			var i, l;
+			var i, l, r=[];
 			dates = dates.split(delimiter);
 
 			for(i=0,l=dates.length; i<l; i+=1){
-				dates[i] = $.intimidatetime.dateParse(dates[i], format, options);
+				r[i] = $.intimidatetime.dateParse(dates[i], format, options);
 			}
 
-			return dates;
+			return r;
 		},
 
 		/* 
@@ -783,7 +953,7 @@
 		* @param options object - includes things like i18n
 		* @return Date
 		*/
-		dateRelative: function(date, relative, options){
+		dateRelative: function(date, relative){
 			var d = $.intimidatetime.dateClone(date),
 				map = { y:'FullYear', M:'Month', d:'Date', h:'Hours', m:'Minutes', s:'Seconds', l:'Milliseconds', c:'Microseconds' },
 				i,l,p,t;
@@ -901,14 +1071,14 @@
 		* @return Date
 		*/
 		dateRangeFormat: function(dates, format, delimiter, options){
-			var i, l;
+			var i, l, r=[];
 			
 			for(i=0,l=dates.length; i<l; i+=1){
-				dates[i] = $.intimidatetime.dateParse(dates[i], format, options);
+				r[i] = $.intimidatetime.dateFormat(dates[i], format, options);
 			}
-			dates = dates.join(delimiter);
+			r = r.join(delimiter);
 
-			return dates;
+			return r;
 		},
 
 		/*
@@ -972,7 +1142,7 @@
 						milli: isIn(tf,'l'),
 						micro: isIn(tf,'c'),
 						timezone: isIn(tf,'z') || isIn(tf,'Z'),
-						ampm: isIn('t') && isIn(tf,'h'),
+						ampm: isIn(tf,'t') && isIn(tf,'h'),
 						iso8601: isIn(tf, 'Z')
 					};
 				s.date = s.year || s.month || s.day;

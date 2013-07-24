@@ -1091,7 +1091,7 @@
 		* @param  string formated like "+0500", "-1245"
 		* @return number
 		*/
-		timezoneOffsetNumber: function(tzString, lookup) {
+		timezoneOffsetNumber: function(tzString, lookup){
 			var i;
 			tzString = tzString.toString().replace(':',''); // excuse any iso8601, end up with "+1245"
 

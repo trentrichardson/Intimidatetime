@@ -1,0 +1,60 @@
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="I18n" class="section">
+	<h2>Internationalization (i18n)</h2>
+
+	<p>Intimidate time comes with full support for i18n.  You can create your own or use the pre-built ones in the i18n directory by simply including it in your page.</p>
+
+<pre>
+{
+	format: 'yyyy-MM-dd HH:mm',      // default format 'yyyy-MM-dd hh:mm:ss:l tt z'
+	units: {
+		year: { 
+				format: 'yyyy',      // how should hour be forrmated in drowdown
+				label: 'Year'        // year label
+			},
+		month: { 
+				format: 'MMM',       // how should hour be forrmated in drowdown
+				label: 'Month',      // month label
+				names: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], 
+				namesAbbr: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+			},
+		day: { 
+				format: 'd',         // how should hour be forrmated in drowdown 
+				label: 'Day',        // day label
+				names: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+				namesAbbr: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+				namesHead: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+			},
+		hour: {  
+				format: 'HH',        // how should hour be forrmated in drowdown
+				label: 'Hour',       // hour label
+				am: ['AM', 'A'],     // possible am names
+				pm: ['PM', 'P']     // possible pm names
+			},
+		minute: { 
+				format: 'mm',        // how should minute be formatted in dropdown
+				label: 'Minute'      // minute label
+			},
+		second: { 
+				format: 'ss',        // how should second be formatted in dropdown
+				label: 'Second'      // second label
+			},
+		millisecond: { 
+				format: 'l',         // how should millisecond be formatted in dropdown
+				label: 'Millisecond' // millisecond label
+			},
+		microsecond: { 
+				format: 'c',         // how should millisecond be formatted in dropdown
+				label: 'Microsecond' // microsecond label
+			},
+		timezone: { 
+				format: 'z',         // how should timezone be formatted in dropdown
+				label: 'Timezone'    // minute label
+			}
+	},
+	rtl: false
+}
+</pre>
+
+</div>

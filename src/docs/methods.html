@@ -1,0 +1,229 @@
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="Methods" class="section">
+	<h2>Methods</h2>
+
+	<h3 id="Instance-Methods">Instance Methods</h3>
+
+	<p>Instance methods are available through the intimidatetime jQuery plugin.  Calling these methods resemble:</p>
+
+<pre>
+var myPicker = $('.selector').intimidatetime();
+mypicker.intimidatetime('open'); // open the picker
+</pre>
+	
+	<p>The following instance methods are currently available:</p>
+
+	<dl class="dl-methods">
+		<dt>.intimidatetime('enable')</dt>
+		<dd>
+			<p>Enables the intimidatetime picker.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('disable')</dt>
+		<dd>
+			<p>Disables the intimidatetime picker.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('destroy')</dt>
+		<dd>
+			<p>Disables and removes the intimidatetime picker.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('open')</dt>
+		<dd>
+			<p>Opens the picker manually.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('close')</dt>
+		<dd>
+			<p>Closes the picker manually.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('option', 'key', 'value')</dt>
+		<dd>
+			<p>Gets or sets an option.</p>
+			<dl class="dl-methodopts">
+				<dt>key</dt><dd>String of the option value to get or set</dd>
+				<dt>value</dt><dd>(optional) Value to set the option to.</dd>
+				<dt>return</dt><dd>When setting the jQuery element. When getting returns the option's value.</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('value', val)</dt>
+		<dd>
+			<p>Gets or sets the picker's value.</p>
+			<dl class="dl-methodopts">
+				<dt>value</dt><dd>(optional) A Date object, or when using ranges and array of Date objects</dd>
+				<dt>return</dt><dd>When setting the jQuery element. When getting returns the value (single Date or array of Dates when using ranges).</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('refresh')</dt>
+		<dd>
+			<p>Rebuilds the picker.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+	</dl>
+
+	<h3 id="Utility-Methods">Utility Methods</h3>
+
+	<p>Utility/Static Methods are available through the $.intimidatetime object, so calling them resembles:</p>
+
+<pre>
+var num = $.intimidatetime.daysInMonth(5, 2001);
+</pre>
+
+	<p>The following utility methods are available:</p>
+
+	<dl class="dl-methods">
+		<dt>setDefaults(options)</dt>
+		<dd>
+			<p>Sets the defaults for intimidatetime instances</p>
+			<dl class="dl-methodopts">
+				<dt>options</dt><dd>object of intimidatetime options</dd>
+				<dt>return</dt><dd>$.intimidatetime object</dd>
+			</dl>
+		</dd>
+
+
+		<dt>dateClone(date)</dt>
+		<dd>
+			<p>Creates a clone of a date, with Intimidatetime's microsecond and timezone support.</p>
+			<dl class="dl-methodopts">
+				<dt>date</dt><dd>Javascript Date object to clone</dd>
+				<dt>return</dt><dd>A new javascript Date object with the same value as requested</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>dateParse(date, format, options)</dt>
+		<dd>
+			<p>Parse a date string with the specified format</p>
+			<dl class="dl-methodopts">
+				<dt>date</dt><dd>A date string</dd>
+				<dt>format</dt><dd>A format string (see formatting options)</dd>
+				<dt>options</dt><dd>Object of option values (see options and i18n)</dd>
+				<dt>return</dt><dd>A javascript Date object</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>dateRangeParse(dates, format, delimiter, options)</dt>
+		<dd>
+			<p>Parse a date string of date ranges with the specified format, dates split by delimiter</p>
+			<dl class="dl-methodopts">
+				<dt>dates</dt><dd>A string dates</dd>
+				<dt>format</dt><dd>A format string for a single date(see formatting options)</dd>
+				<dt>delimiter</dt><dd>A string that delimits each date.</dd>
+				<dt>options</dt><dd>Object of option values (see options and i18n)</dd>
+				<dt>return</dt><dd>Array of javascript Date objects</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>dateRelative(date, relative)</dt>
+		<dd>
+			<p>Compute and return a new date relative to the given one.</p>
+			<dl class="dl-methodopts">
+				<dt>date</dt><dd>A javascript Date to base the calculation from</dd>
+				<dt>relative</dt><dd>A string with a date calclulation (ex: "+2y", "-1M+5d").  Use a +/- followed by the number of units followed by the unit (y=year, M=month, d=day, h=hour, m=minute, s=second, l=microsecond, c=macrosecond).</dd>
+				<dt>return</dt><dd>A javascript Date object of the new date value.</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>dateFormat(date, format, options)</dt>
+		<dd>
+			<p>Format a Date object to the given format</p>
+			<dl class="dl-methodopts">
+				<dt>date</dt><dd>A javascript Date object</dd>
+				<dt>format</dt><dd>A format string (see formatting options)</dd>
+				<dt>options</dt><dd>Object of option values (see options and i18n)</dd>
+				<dt>return</dt><dd>A string of the formattd date</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>dateRangeFormat: function(dates, format, delimiter, options)</dt>
+		<dd>
+			<p>Format an array of dates into a date range string with the specified format, dates split by delimiter</p>
+			<dl class="dl-methodopts">
+				<dt>dates</dt><dd>A array of Javascript Date objects</dd>
+				<dt>format</dt><dd>A format string for a single date(see formatting options)</dd>
+				<dt>delimiter</dt><dd>A string that delimits each date.</dd>
+				<dt>options</dt><dd>Object of option values (see options and i18n)</dd>
+				<dt>return</dt><dd>A string of formatted dates</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>timezoneOffsetNumber(tzString, lookup)</dt>
+		<dd>
+			<p>Compute the number of minutes offset for a timezone string (ex: "-0400" gives 240)</p>
+			<dl class="dl-methodopts">
+				<dt>tzString</dt><dd>A timezone string (ex: "-0400" or "Z" for iso1806</dd>
+				<dt>lookup</dt><dd>Object of timezone translation key value pairs.  When the tzString isn't directly computable it will try to lookup the string.  For example if you pass "EST" it may not be directly computable, if the lookup contains { "260": "EST" } it can return a value. See timezone names in Options.</dd>
+				<dt>return</dt><dd>Number of minutes needed to return to GMT</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>daysInMonth(m, y)</dt>
+		<dd>
+			<p>Compute the number of days in a month</p>
+			<dl class="dl-methodopts">
+				<dt>m</dt><dd>A number indicating the month. 0=January, 11=December, just like a javascript Date.</dd>
+				<dt>y</dt><dd>A number indicating the year.</dd>
+				<dt>return</dt><dd>Number of days in the month</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>detectSupport(timeFormat)</dt>
+		<dd>
+			<p>Scan a timeFormat string and determine what features should be supported.</p>
+			<dl class="dl-methodopts">
+				<dt>timeFormat</dt><dd>A string containing format tokens</dd>
+				<dt>return</dt><dd>An object of boolean values of each supported feature.</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>log([])</dt>
+		<dd>
+			<p>Log to the console, when available any number of arguments</p>
+			<dl class="dl-methodopts">
+				<dt>args</dt><dd>Any number of arguments of any type</dd>
+				<dt>return</dt><dd>Void</dd>
+			</dl>
+		</dd>
+
+	</dl>
+
+</div>

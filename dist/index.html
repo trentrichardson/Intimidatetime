@@ -14,24 +14,24 @@
 				padding:0;
 				border:0;
 			}
-			body{ font: 100% "Gill Sans", "Gill Sans MT", Calibri, sans-serif; color: #333; background-color: #f8f8f8; }
+			body{ font: 100% "Helvetica Neue", Helvetica, Arial, sans-serif; color: #333; background-color: #fff; }
 			h1,h2,h3,h4{ color: #777; margin: 10px 0 10px 0; }
-			h1{ color: #000; font: 18px/22px normal Optima, Segoe, "Segoe UI", Candara, Calibri, Arial, sans-serif; margin: 0; }
-			h2{ font-weight: normal; color: #000; margin-left: -25px; }
-			h3{ font-size: 16px; margin: 20px 0 10px 0; }
+			h1{ color: #000; font-size: 18px; line-height: 22px; margin: 0; }
+			h2{ font-weight: normal; color: #000; margin-left: -25px; font-size: 32px; font-size: 2.2rem;}
+			h3{ font-size: 22px; font-size: 1.4rem; margin: 20px 0 10px 0; }
 			h4{ padding: 10px 10px; margin: 10px 0; letter-spacing: 1.2px; /* color: #697c9d; */ color: #394c6d; font-size: 16px; }
 			h4 a{ color: #394c6d; text-decoration: none; }
 			p{ text-align: left; font-size: 1rem; line-height: 20px; color: #444444; margin: 5px 0 5px 0; }
 			a,a:active,a:link,a:visited,a:focus{ outline: none; color: #a0b75d; }
 			a:hover{} 
 			dl{}
-			dl dt{ font-weight: bold; color: #777; }
-			dl dd{ margin: 5px 0 5px 20px; }
-			pre{ font-size: 12px; line-height: 16px; padding: 5px 5px 5px 10px; margin: 10px 0; border-left: solid 5px #9EC45F; overflow: auto; }
+			dl dt{ font-weight: bold; color: #555; }
+			dl dd{ /*margin: 5px 0 5px 20px;*/ }
+			pre{ font-size: 12px; line-height: 16px; padding: 5px 5px 5px 10px; margin: 10px 0; border-left: solid 5px #9EC45F; background-color: #f4f4f4; overflow: auto; tab-size: 4; -moz-tab-size: 4; -o-tab-size: 4; -webkit-tab-size: 4; }
 			form{ font-size: 1rem; }
 			label{ display:block; color: #7ba0d8; }
 			textarea{ overflow: auto; }
-			input,select,textarea{  font-family: "Lucida Sans", "Lucida Grande", "Lucida Sans Unicode", sans-serif; font-size: 1rem; padding: 8px 10px 9px 10px; background-color: #ffffff; border: solid 1px #D2E1DE; 
+			input,select,textarea{ font-family: Consolas, monaco, monospace; font-size: 1rem; padding: 8px 10px 9px 10px; background-color: #ffffff; border: solid 1px #D2E1DE; 
 				-webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; box-sizing: border-box;
 				border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; }
 			input:focus, select:focus, textarea:focus{ border: solid 1px #ff958d; }
@@ -43,8 +43,7 @@
 			::selection, ::-moz-selection{ background-color: #535353; color: #fff; }
 
 			.wrapper{ width: 100%; height: 100%; }
-			.header{ position: fixed; top: 0; left: 0; bottom: 0; background-color: #fff; border-right: solid 2px #e4e4e4;width: 180px; padding: 20px; overflow: auto; 
-				-moz-box-shadow: 2px 2px 8px 0 #ddd; -webkit-box-shadow: 2px 2px 8px 0 #ddd; box-shadow: 2px 2px 8px 0 #ddd; }
+			.header{ position: fixed; top: 0; left: 0; bottom: 0; background-color: #f8f8f8; border-right: solid 2px #e4e4e4;width: 180px; padding: 20px; overflow: auto; }
 			.header ul{  }
 			.header ul li{ margin: 5px 0; list-style: none;}
 			.header ul li a{ text-decoration: none; }
@@ -65,6 +64,12 @@
 			.ebook{}
 			.ebook img.ebookimg{ float: left; margin: 0 15px 15px 0; width: 100px; }
 			.ebook .buyp a iframe{ margin-bottom: -5px; }
+			
+			dl.dl-options dd{ margin: -18px 0 10 150px; }
+			dl.dl-formatting dd{ margin: -18px 0 10px 80px; }
+			dl.dl-methods > dd{ margin: 5px 0 20px 40px; }
+			dl.dl-methodopts dt{ font-weight: normal; font-style: italic; }
+			dl.dl-methodopts dd{ margin: -18px 0 10px 80px; }
 		</style> 
 		
 		<link rel="stylesheet" media="all" type="text/css" href="Intimidatetime.css" />
@@ -88,137 +93,503 @@
 			</div>
 
 			<div class="content">
-				<!-- ---------------------------------------------- -->
-				<!-- ---------------------------------------------- -->
-				<div id="Introduction" class="section">
-					<h2>Introduction</h2>
-					<p class="intro">Intimidatetime is a wicked awesome date time picker for both jQuery and Zepto.  It features high customization with low configuration.</p>
-				</div>
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="Introduction" class="section">
+	<h2>Introduction</h2>
+	<p class="intro">Intimidatetime is a wicked awesome date time picker for both jQuery and Zepto.  It features high customization with low configuration.</p>
+</div>
 
-				<!-- ---------------------------------------------- -->
-				<!-- ---------------------------------------------- -->
-				<!--
-				<div id="Get_Started" class="section">
-					<h2>Get Started</h2>
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<!--
+<div id="Get_Started" class="section">
+	<h2>Get Started</h2>
+	
+	<h3>Highly Recommended</h3>
+	<p>Subscribe to <a href="http://trentrichardson.com/category/impromptu/" title="TrentRichardson.com">my newsletter</a> and follow me <a href="http://twitter.com/practicalweb" title="Follow me on Twitter">@practicalweb</a>.</p>
+	
+	<h3>Donation</h3>
+	<a href="http://carbounce.com" title="Car Bounce" style="float: right; display: inline-block;width:300px;padding: 10px;background-color: #fbfbfb;border: dotted 4px #e8e8e8;color: #9EC45F;font-size: 14px;text-decoration:none;letter-spacing:1px;"><img src="http://carbounce.com/img/logo_small.png" alt="Car Bounce" align="left" style="margin-right: 20px;"/>Try my new app to keep you informed of your car's financing status and value.</a>	
+	
+	<p>Has Intimidatetime been helpful to you?</p>
+	<div class="donation">					
+		<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+		<input type="hidden" name="cmd" value="_s-xclick">
+		<input type="hidden" name="hosted_button_id" value="LF6AGYRBK6P2S">
+		<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+		<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+		</form>
+	</div>
+	
+	<h3 id="Download">Download</h3>
+	<ul>
+		<li><a href="https://github.com/trentrichardson/Intimidatetime" title="Fork it on Github">Github</a></li>
+	</ul>
+
+	<h3>Version</h3>
+	<p>Version 0.1</p>
+	<p>Last updated on 06/06/2013</p>
+
+	<p>Intimidatetime is currently available for use in all personal or commercial projects under the MIT license.</p>
+	<ul>
+		<li><a href="http://trentrichardson.com/Impromptu/MIT-LICENSE.txt" title="MIT License">MIT License</a></li>
+	</ul>
+	
+</div>
+-->
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="Options" class="section">
+	<h2>Options</h2>
+
+	<p>Options are subject to change.  Also visit the <a href="#I18n" title="I18n">I18n</a> for additional options:</p>
+	
+<pre>
+{
+
+	// Date object, array of Date objects, or strict formatted string to set as the value
+	value: null,
+
+	// picker time format
+	previewFormat: null,
+
+	// format shown in the alt field if used, defaults to format option
+	altFormat: null,
+
+	// jQuery element or selector for an alternate input
+	alt: null,
+
+	// min allowed date - date object or relative string '-1M'
+	min: null,
+
+	// max allowed date - date object or relative string '-1M'
+	max: null,
+
+	// number of ranges or pick list of dates, will generate a calendar side by side for each date
+	ranges: 0,
+
+	// string to delimit ranges. this string MUST NOT occur in the time format
+	rangeDelimiter: ' - ',
+
+	// relative date string for the minimum allowed difference between two dates
+	rangeIntervalMin: '+0l',
+
+	// relative date string for the maximum allowed difference between two dates
+	rangeIntervalMax: null,
+
+	// number of months to show at once
+	months: 1,
+
+	// 0-6, which day is the start of the week
+	startOfWeek: 0,
+
+	// whether the picker should be inline
+	inline: false,
+
+	// use theme to prefix all class names, change your css accordingly
+	theme: 'intimidatetime',
+
+	// how the picker is aligned: vertical, horizontal (maps to css styling, no logic). Or should this be "classes"?
+	mode: 'basic',
+
+	// define any and all units
+	units: {
+		year: { map: 'FullYear', type: 'select', range: 20, step: 1, format: 'yyyy', value: null},
+		month: { map: 'Month', type: 'select', min: 0, max: 11, step: 1, format: 'MMM', value: null },
+		day: { map: 'Date', type: 'select', min: 1, max: 31, step: 1, value: null },
+		hour: { map: 'Hours', type: 'select', min: 0, max: 23, step: 1, value: null },
+		minute: { map: 'Minutes', type: 'select', min: 0, max: 59, step: 1, value: null },
+		second: { map: 'Seconds', type: 'select', min: 0, max: 59, step: 1, value: null },
+		milli: { map: 'Milliseconds', type: 'select', min: 0, max: 999, step: 10, value: null },
+		micro: { map: 'Microseconds', type: 'select', min: 0, max: 999, step: 10, value: null },
+		timezone: { map: 'Timezone', type: 'select', value: null, options: [720,660,600,570,540,480,420,360,300,270,240,210,180,120,60, // just like Date.getTimezoneOffset()
+				0,-60,-120,-180,-210,-240,-270,-300,-330,-345,-360,-390,-420,-480,-525,-540,-570,-600,-630,-660,-690,-720,-765,-780,-840],
+				names: {} // Key value pairs mapping timezone values to text values { "-240": "EDT", "-300": "CDT".. }
+			}
+	},
+
+	// the order which each module appears
+	groups: [
+		{ name: 'date', units: ['year', 'month', 'day'] },
+		{ name: 'time', units: ['hour', 'minute', 'second', 'millisecond', 'microsecond', 'timezone'] }
+	],
+
+	// buttons can be added at the bottom of the picker
+	buttons: [
+		//{ text: 'Done', classes: '', tag: 'button', action: function(inst){} }
+	],
+
+	events: {
+		// event fired on value change request, use event.preventDefault() or return false to prevent value change
+		change: function(e, date, inst){},
+
+		// event fired when the picker is (re)built
+		refresh: function(e, inst){},
+
+		// event fired to validate a day, use event.preventDefault() or return false to disable the day
+		enableDay: function(e, date, inst){},
+
+		// event fired when the picker is opened, use event.preventDefault() or return false to prevent opening
+		open: function(e, inst){},
+
+		// event fired when the picker is closed, use event.preventDefault() or return false to prevent closing
+		close: function(e, inst){}
+	}
+}
+</pre>
+
+</div>
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="Methods" class="section">
+	<h2>Methods</h2>
+
+	<h3 id="Instance-Methods">Instance Methods</h3>
+
+	<p>Instance methods are available through the intimidatetime jQuery plugin.  Calling these methods resemble:</p>
+
+<pre>
+var myPicker = $('.selector').intimidatetime();
+mypicker.intimidatetime('open'); // open the picker
+</pre>
+	
+	<p>The following instance methods are currently available:</p>
+
+	<dl class="dl-methods">
+		<dt>.intimidatetime('enable')</dt>
+		<dd>
+			<p>Enables the intimidatetime picker.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('disable')</dt>
+		<dd>
+			<p>Disables the intimidatetime picker.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('destroy')</dt>
+		<dd>
+			<p>Disables and removes the intimidatetime picker.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('open')</dt>
+		<dd>
+			<p>Opens the picker manually.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('close')</dt>
+		<dd>
+			<p>Closes the picker manually.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('option', 'key', 'value')</dt>
+		<dd>
+			<p>Gets or sets an option.</p>
+			<dl class="dl-methodopts">
+				<dt>key</dt><dd>String of the option value to get or set</dd>
+				<dt>value</dt><dd>(optional) Value to set the option to.</dd>
+				<dt>return</dt><dd>When setting the jQuery element. When getting returns the option's value.</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('value', val)</dt>
+		<dd>
+			<p>Gets or sets the picker's value.</p>
+			<dl class="dl-methodopts">
+				<dt>value</dt><dd>(optional) A Date object, or when using ranges and array of Date objects</dd>
+				<dt>return</dt><dd>When setting the jQuery element. When getting returns the value (single Date or array of Dates when using ranges).</dd>
+			</dl>
+		</dd>
+
+
+		<dt>.intimidatetime('refresh')</dt>
+		<dd>
+			<p>Rebuilds the picker.</p>
+			<dl class="dl-methodopts">
+				<dt>return</dt><dd>jQuery element</dd>
+			</dl>
+		</dd>
+
+	</dl>
+
+	<h3 id="Utility-Methods">Utility Methods</h3>
+
+	<p>Utility/Static Methods are available through the $.intimidatetime object, so calling them resembles:</p>
+
+<pre>
+var num = $.intimidatetime.daysInMonth(5, 2001);
+</pre>
+
+	<p>The following utility methods are available:</p>
+
+	<dl class="dl-methods">
+		<dt>setDefaults(options)</dt>
+		<dd>
+			<p>Sets the defaults for intimidatetime instances</p>
+			<dl class="dl-methodopts">
+				<dt>options</dt><dd>object of intimidatetime options</dd>
+				<dt>return</dt><dd>$.intimidatetime object</dd>
+			</dl>
+		</dd>
+
+
+		<dt>dateClone(date)</dt>
+		<dd>
+			<p>Creates a clone of a date, with Intimidatetime's microsecond and timezone support.</p>
+			<dl class="dl-methodopts">
+				<dt>date</dt><dd>Javascript Date object to clone</dd>
+				<dt>return</dt><dd>A new javascript Date object with the same value as requested</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>dateParse(date, format, options)</dt>
+		<dd>
+			<p>Parse a date string with the specified format</p>
+			<dl class="dl-methodopts">
+				<dt>date</dt><dd>A date string</dd>
+				<dt>format</dt><dd>A format string (see formatting options)</dd>
+				<dt>options</dt><dd>Object of option values (see options and i18n)</dd>
+				<dt>return</dt><dd>A javascript Date object</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>dateRangeParse(dates, format, delimiter, options)</dt>
+		<dd>
+			<p>Parse a date string of date ranges with the specified format, dates split by delimiter</p>
+			<dl class="dl-methodopts">
+				<dt>dates</dt><dd>A string dates</dd>
+				<dt>format</dt><dd>A format string for a single date(see formatting options)</dd>
+				<dt>delimiter</dt><dd>A string that delimits each date.</dd>
+				<dt>options</dt><dd>Object of option values (see options and i18n)</dd>
+				<dt>return</dt><dd>Array of javascript Date objects</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>dateRelative(date, relative)</dt>
+		<dd>
+			<p>Compute and return a new date relative to the given one.</p>
+			<dl class="dl-methodopts">
+				<dt>date</dt><dd>A javascript Date to base the calculation from</dd>
+				<dt>relative</dt><dd>A string with a date calclulation (ex: "+2y", "-1M+5d").  Use a +/- followed by the number of units followed by the unit (y=year, M=month, d=day, h=hour, m=minute, s=second, l=microsecond, c=macrosecond).</dd>
+				<dt>return</dt><dd>A javascript Date object of the new date value.</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>dateFormat(date, format, options)</dt>
+		<dd>
+			<p>Format a Date object to the given format</p>
+			<dl class="dl-methodopts">
+				<dt>date</dt><dd>A javascript Date object</dd>
+				<dt>format</dt><dd>A format string (see formatting options)</dd>
+				<dt>options</dt><dd>Object of option values (see options and i18n)</dd>
+				<dt>return</dt><dd>A string of the formattd date</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>dateRangeFormat: function(dates, format, delimiter, options)</dt>
+		<dd>
+			<p>Format an array of dates into a date range string with the specified format, dates split by delimiter</p>
+			<dl class="dl-methodopts">
+				<dt>dates</dt><dd>A array of Javascript Date objects</dd>
+				<dt>format</dt><dd>A format string for a single date(see formatting options)</dd>
+				<dt>delimiter</dt><dd>A string that delimits each date.</dd>
+				<dt>options</dt><dd>Object of option values (see options and i18n)</dd>
+				<dt>return</dt><dd>A string of formatted dates</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>timezoneOffsetNumber(tzString, lookup)</dt>
+		<dd>
+			<p>Compute the number of minutes offset for a timezone string (ex: "-0400" gives 240)</p>
+			<dl class="dl-methodopts">
+				<dt>tzString</dt><dd>A timezone string (ex: "-0400" or "Z" for iso1806</dd>
+				<dt>lookup</dt><dd>Object of timezone translation key value pairs.  When the tzString isn't directly computable it will try to lookup the string.  For example if you pass "EST" it may not be directly computable, if the lookup contains { "260": "EST" } it can return a value. See timezone names in Options.</dd>
+				<dt>return</dt><dd>Number of minutes needed to return to GMT</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>daysInMonth(m, y)</dt>
+		<dd>
+			<p>Compute the number of days in a month</p>
+			<dl class="dl-methodopts">
+				<dt>m</dt><dd>A number indicating the month. 0=January, 11=December, just like a javascript Date.</dd>
+				<dt>y</dt><dd>A number indicating the year.</dd>
+				<dt>return</dt><dd>Number of days in the month</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>detectSupport(timeFormat)</dt>
+		<dd>
+			<p>Scan a timeFormat string and determine what features should be supported.</p>
+			<dl class="dl-methodopts">
+				<dt>timeFormat</dt><dd>A string containing format tokens</dd>
+				<dt>return</dt><dd>An object of boolean values of each supported feature.</dd>
+			</dl>
+		</dd>
+		
+
+		<dt>log([])</dt>
+		<dd>
+			<p>Log to the console, when available any number of arguments</p>
+			<dl class="dl-methodopts">
+				<dt>args</dt><dd>Any number of arguments of any type</dd>
+				<dt>return</dt><dd>Void</dd>
+			</dl>
+		</dd>
+
+	</dl>
+
+</div>
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="Events" class="section">
+	<h2>Events</h2>
+
+	<p>Events may be passed through the options (see <a href="#Options" title="Options">Options</a> for avaible events) or you can bind to them manually:</p>
+<pre>
+var myPicker = $('.selector').intimidatetime();
+
+myPicker.on('intimidatetime:change', function(e, date, inst){
+	console.log('Time Changed!');
+});
+</pre>
+	<p>Notice the "intimidatetime:" indicates the namespace for the events, then the event name.</p>
+</div>
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+
+<div id="Formatting" class="section">
+	<h2>Formatting</h2>
+
+	<p>Formatting your date/time uses special tokens inside a string.  The following are the tokens allowed and their meaning.</p>
+	
+	<dl class="dl-formatting">
+		<dt>U</dt><dd>Unix timestamp</dd>
+		<dt>yy</dt><dd>Two digit year</dd>
+		<dt>yyyy</dt><dd>Four digit year</dd>
+		<dt>M</dt><dd>Month with no leading 0</dd>
+		<dt>MM</dt><dd>Month with leading 0</dd>
+		<dt>MMM</dt><dd>Month name abbreviation as defined in i18n</dd>
+		<dt>MMMM</dt><dd>Month name as defined in i18n</dd>
+		<dt>d</dt><dd>Day with no leading 0</dd>
+		<dt>dd</dt><dd>Day with leading 0</dd>
+		<dt>ddd</dt><dd>Day name abbreviation as defined in i18n</dd>
+		<dt>dddd</dt><dd>Day name as defined in i18n</dd>
+		<dt>HH</dt><dd>Hour with leading 0 (24 hour)</dd>
+		<dt>h</dt><dd>Hour with no leading 0 (12 hour)</dd>
+		<dt>hh</dt><dd>Hour with leading 0 (12 hour)</dd>
+		<dt>m</dt><dd>Minute with no leading 0</dd>
+		<dt>mm</dt><dd>Minute with leading 0</dd>
+		<dt>s</dt><dd>Second with no leading 0</dd>
+		<dt>ss</dt><dd>Second with leading 0</dd>
+		<dt>l</dt><dd>Milliseconds always with leading 0</dd>
+		<dt>c</dt><dd>Microseconds always with leading 0</dd>
+		<dt>t</dt><dd>a or p for AM/PM</dd>
+		<dt>T</dt><dd>A or P for AM/PM</dd>
+		<dt>tt</dt><dd>am or pm for AM/PM</dd>
+		<dt>TT</dt><dd>AM or PM for AM/PM</dd>
+		<dt>z</dt><dd>Timezone as defined by timezoneList</dd>
+		<dt>zz</dt><dd>Timezone as defined by timezoneList, but in Iso 8601 format (+04:45)</dd>
+		<dt>zzz</dt><dd>Timezone as defined by i18n timezone names. (You must define these)</dd>
+		<dt>'...'</dt><dd>Literal text (Uses single quotes)</dd>
+	</dl>
+
+</div>
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="I18n" class="section">
+	<h2>Internationalization (i18n)</h2>
+
+	<p>Intimidate time comes with full support for i18n.  You can create your own or use the pre-built ones in the i18n directory by simply including it in your page.</p>
+
+<pre>
+{
+	format: 'yyyy-MM-dd HH:mm',      // default format 'yyyy-MM-dd hh:mm:ss:l tt z'
+	units: {
+		year: { 
+				format: 'yyyy',      // how should hour be forrmated in drowdown
+				label: 'Year'        // year label
+			},
+		month: { 
+				format: 'MMM',       // how should hour be forrmated in drowdown
+				label: 'Month',      // month label
+				names: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], 
+				namesAbbr: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+			},
+		day: { 
+				format: 'd',         // how should hour be forrmated in drowdown 
+				label: 'Day',        // day label
+				names: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+				namesAbbr: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+				namesHead: ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
+			},
+		hour: {  
+				format: 'HH',        // how should hour be forrmated in drowdown
+				label: 'Hour',       // hour label
+				am: ['AM', 'A'],     // possible am names
+				pm: ['PM', 'P']     // possible pm names
+			},
+		minute: { 
+				format: 'mm',        // how should minute be formatted in dropdown
+				label: 'Minute'      // minute label
+			},
+		second: { 
+				format: 'ss',        // how should second be formatted in dropdown
+				label: 'Second'      // second label
+			},
+		millisecond: { 
+				format: 'l',         // how should millisecond be formatted in dropdown
+				label: 'Millisecond' // millisecond label
+			},
+		microsecond: { 
+				format: 'c',         // how should millisecond be formatted in dropdown
+				label: 'Microsecond' // microsecond label
+			},
+		timezone: { 
+				format: 'z',         // how should timezone be formatted in dropdown
+				label: 'Timezone'    // minute label
+			}
+	},
+	rtl: false
+}
+</pre>
+
+</div>
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="Examples" class="section">
+	<h2>Examples</h2>
 					
-					<h3>Highly Recommended</h3>
-					<p>Subscribe to <a href="http://trentrichardson.com/category/impromptu/" title="TrentRichardson.com">my newsletter</a> and follow me <a href="http://twitter.com/practicalweb" title="Follow me on Twitter">@practicalweb</a>.</p>
-					
-					<h3>Donation</h3>
-					<a href="http://carbounce.com" title="Car Bounce" style="float: right; display: inline-block;width:300px;padding: 10px;background-color: #fbfbfb;border: dotted 4px #e8e8e8;color: #9EC45F;font-size: 14px;text-decoration:none;letter-spacing:1px;"><img src="http://carbounce.com/img/logo_small.png" alt="Car Bounce" align="left" style="margin-right: 20px;"/>Try my new app to keep you informed of your car's financing status and value.</a>	
-					
-					<p>Has Intimidatetime been helpful to you?</p>
-					<div class="donation">					
-						<form action="https://www.paypal.com/cgi-bin/webscr" method="post">
-						<input type="hidden" name="cmd" value="_s-xclick">
-						<input type="hidden" name="hosted_button_id" value="LF6AGYRBK6P2S">
-						<input type="image" src="https://www.paypal.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-						<img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
-						</form>
-					</div>
-					
-					<h3 id="Download">Download</h3>
-					<ul>
-						<li><a href="https://github.com/trentrichardson/Intimidatetime" title="Fork it on Github">Github</a></li>
-					</ul>
-
-					<h3>Version</h3>
-					<p>Version 0.1</p>
-					<p>Last updated on 06/06/2013</p>
-
-					<p>Intimidatetime is currently available for use in all personal or commercial projects under the MIT license.</p>
-					<ul>
-						<li><a href="http://trentrichardson.com/Impromptu/MIT-LICENSE.txt" title="MIT License">MIT License</a></li>
-					</ul>
-					
-				</div>
-				-->
-
-				<!-- ---------------------------------------------- -->
-				<!-- ---------------------------------------------- -->
-				<!--
-				<div id="Options" class="section">
-					<h2>Options</h2>
-					<dl>
-																	
-					</dl>
-
-				</div>
-				-->
-
-				<!-- ---------------------------------------------- -->
-				<!-- ---------------------------------------------- -->
-				<!--
-				<div id="Methods" class="section">
-					<h2>Methods</h2>
-					<dl class="methoddl">
-						
-					</dl>
-
-				</div>
-				-->
-
-				<!-- ---------------------------------------------- -->
-				<!-- ---------------------------------------------- -->
-				<!-- 
-				<div id="Events" class="section">
-					<h2>Events</h2>
-
-					<p>If you like to bind events manually you can do so with the following:</p>
-					<dl class="methoddl">
-						
-					</dl>
-
-				</div>
-
-				<!-- ---------------------------------------------- -->
-				<!-- ---------------------------------------------- -->
-				
-				<div id="Events" class="section">
-					<h2>Formatting</h2>
-
-					<p>Formatting your date/time uses special tokens inside a string.  The following are the tokens allowed and their meaning.</p>
-					
-					<dl class="defs">
-						<dt>U</dt><dd>Unix timestamp</dd>
-						<dt>yy</dt><dd>Two digit year</dd>
-						<dt>yyyy</dt><dd>Four digit year</dd>
-						<dt>M</dt><dd>Month with no leading 0</dd>
-						<dt>MM</dt><dd>Month with leading 0</dd>
-						<dt>MMM</dt><dd>Month name abbreviation as defined in i18n</dd>
-						<dt>MMMM</dt><dd>Month name as defined in i18n</dd>
-						<dt>d</dt><dd>Day with no leading 0</dd>
-						<dt>dd</dt><dd>Day with leading 0</dd>
-						<dt>ddd</dt><dd>Day name abbreviation as defined in i18n</dd>
-						<dt>dddd</dt><dd>Day name as defined in i18n</dd>
-						<dt>HH</dt><dd>Hour with leading 0 (24 hour)</dd>
-						<dt>h</dt><dd>Hour with no leading 0 (12 hour)</dd>
-						<dt>hh</dt><dd>Hour with leading 0 (12 hour)</dd>
-						<dt>m</dt><dd>Minute with no leading 0</dd>
-						<dt>mm</dt><dd>Minute with leading 0</dd>
-						<dt>s</dt><dd>Second with no leading 0</dd>
-						<dt>ss</dt><dd>Second with leading 0</dd>
-						<dt>l</dt><dd>Milliseconds always with leading 0</dd>
-						<dt>c</dt><dd>Microseconds always with leading 0</dd>
-						<dt>t</dt><dd>a or p for AM/PM</dd>
-						<dt>T</dt><dd>A or P for AM/PM</dd>
-						<dt>tt</dt><dd>am or pm for AM/PM</dd>
-						<dt>TT</dt><dd>AM or PM for AM/PM</dd>
-						<dt>z</dt><dd>Timezone as defined by timezoneList</dd>
-						<dt>zz</dt><dd>Timezone as defined by timezoneList, but in Iso 8601 format (+04:45)</dd>
-						<dt>zzz</dt><dd>Timezone as defined by i18n timezone names. (You must define these)</dd>
-						<dt>'...'</dt><dd>Literal text (Uses single quotes)</dd>
-					</dl>
-
-				</div>
-
-				
-				<!-- ---------------------------------------------- -->
-				<!-- ---------------------------------------------- -->
-				<div id="Examples" class="section">
-					<h2>Examples</h2>
-					
-					<h3>Basics</h3>
+	<h3 id="Examples-Basics">Basics</h3>
 					
 <div class="example-container">
 	<p>A timepicker in the simplest.</p>
@@ -261,50 +632,4 @@ $('#ex_basic_2').intimidatetime('option','format');
 
 
 					
-				</div>
-			</div>
-
-			<div class="footer">
-
-			</div>
-		</div>
-
-		<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
-		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
-		<script type="text/javascript" src="Intimidatetime.js"></script>
-		<!-- <script type="text/javascript" src="i18n/Intimidatetime-es.js"></script> -->
-		<script type="text/javascript">
-			
-			$(function(){
-
-				// run the examples
-				$('.example-container').each(function(i,el){
-					var $ex = $(this),
-						$run = $ex.find('.run'),
-						code = $ex.find('.code').text();
-					if($run.length){
-						$run.click(function(e){
-							e.preventDefault();
-							(new Function(code))();
-						});
-					}
-					else{
-						(new Function(code))();
-					}
-				});
-			});
-			
-		</script>
-		
-		<script type="text/javascript">/*
-		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-		*/</script>
-		<script type="text/javascript">/*
-		try {
-		var pageTracker = _gat._getTracker("UA-7602218-1");
-		pageTracker._trackPageview();
-		} catch(err) {}*/</script>
-
-	</body>
-</html>
+</div>

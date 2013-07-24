@@ -1,4 +1,4 @@
-/*! Intimidatetime - v0.1.0 - 2013-07-23
+/*! Intimidatetime - v0.1.0 - 2013-07-24
 * http://trentrichardson.com/examples/Intimidatetime
 * Copyright (c) 2013 Trent Richardson; Licensed MIT */
 /*jslint white: true, undef: false, nomen: true */
@@ -1086,7 +1086,7 @@
 		* @param  string formated like "+0500", "-1245"
 		* @return number
 		*/
-		timezoneOffsetNumber: function(tzString, lookup) {
+		timezoneOffsetNumber: function(tzString, lookup){
 			var i;
 			tzString = tzString.toString().replace(':',''); // excuse any iso8601, end up with "+1245"
 

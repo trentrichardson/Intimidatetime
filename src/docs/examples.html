@@ -1,0 +1,49 @@
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="Examples" class="section">
+	<h2>Examples</h2>
+					
+	<h3 id="Examples-Basics">Basics</h3>
+					
+<div class="example-container">
+	<p>A timepicker in the simplest.</p>
+	
+	<input type="text" id="ex_basic_1" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_basic_1').intimidatetime({
+	ranges: 1,
+	buttons: [
+			{ text: 'Done', action: function(inst){ inst.close(); } }
+		],
+	events: {
+		refresh: function(e,inst){
+			console.log('refreshed', inst.settings);
+		},
+		change: function(e,inst){
+			console.log('changed value');
+		}
+	}
+});
+</pre>
+</div>
+
+					
+<div class="example-container">
+	<p>Add a few options, change the format.</p>
+	
+	<input type="text" id="ex_basic_2" value="" class="inputLong"/>
+	
+
+<pre class="code">
+$('#ex_basic_2').intimidatetime({
+	format: 'MMM d, yyyy'
+});
+$('#ex_basic_2').intimidatetime('option','format');
+</pre>
+</div>
+
+
+					
+</div>

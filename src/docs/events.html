@@ -1,0 +1,15 @@
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="Events" class="section">
+	<h2>Events</h2>
+
+	<p>Events may be passed through the options (see <a href="#Options" title="Options">Options</a> for avaible events) or you can bind to them manually:</p>
+<pre>
+var myPicker = $('.selector').intimidatetime();
+
+myPicker.on('intimidatetime:change', function(e, date, inst){
+	console.log('Time Changed!');
+});
+</pre>
+	<p>Notice the "intimidatetime:" indicates the namespace for the events, then the event name.</p>
+</div>

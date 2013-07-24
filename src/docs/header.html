@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html> 
+	<head> 
+		<meta charset="UTF-8" />
+
+		<title>Intimidatetime - jQuery and Zepto datetime picker</title>
+		<meta name="Description" content="The home page of Intimidatetime, the best datetime picker you'll ever meet" />
+		<meta name="Keywords" content="jquery, zepto, date, time, picker" />
+
+		
+		<style type="text/css"> 
+			body,img,p,h1,h2,h3,h4,h5,h6,form,table,td,ul,ol,li,dl,dt,dd,pre,blockquote,fieldset,label{
+				margin:0;
+				padding:0;
+				border:0;
+			}
+			body{ font: 100% "Helvetica Neue", Helvetica, Arial, sans-serif; color: #333; background-color: #fff; }
+			h1,h2,h3,h4{ color: #777; margin: 10px 0 10px 0; }
+			h1{ color: #000; font-size: 18px; line-height: 22px; margin: 0; }
+			h2{ font-weight: normal; color: #000; margin-left: -25px; font-size: 32px; font-size: 2.2rem;}
+			h3{ font-size: 22px; font-size: 1.4rem; margin: 20px 0 10px 0; }
+			h4{ padding: 10px 10px; margin: 10px 0; letter-spacing: 1.2px; /* color: #697c9d; */ color: #394c6d; font-size: 16px; }
+			h4 a{ color: #394c6d; text-decoration: none; }
+			p{ text-align: left; font-size: 1rem; line-height: 20px; color: #444444; margin: 5px 0 5px 0; }
+			a,a:active,a:link,a:visited,a:focus{ outline: none; color: #a0b75d; }
+			a:hover{} 
+			dl{}
+			dl dt{ font-weight: bold; color: #555; }
+			dl dd{ /*margin: 5px 0 5px 20px;*/ }
+			pre{ font-size: 12px; line-height: 16px; padding: 5px 5px 5px 10px; margin: 10px 0; border-left: solid 5px #9EC45F; background-color: #f4f4f4; overflow: auto; tab-size: 4; -moz-tab-size: 4; -o-tab-size: 4; -webkit-tab-size: 4; }
+			form{ font-size: 1rem; }
+			label{ display:block; color: #7ba0d8; }
+			textarea{ overflow: auto; }
+			input,select,textarea{ font-family: Consolas, monaco, monospace; font-size: 1rem; padding: 8px 10px 9px 10px; background-color: #ffffff; border: solid 1px #D2E1DE; 
+				-webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; box-sizing: border-box;
+				border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px; -khtml-border-radius: 5px; }
+			input:focus, select:focus, textarea:focus{ border: solid 1px #ff958d; }
+			input[type='submit'], button{ background-color: #7ba0d8; color:#ffffff; font-size: 1rem; padding: 8px 10px 9px 10px; text-align: center; border: solid 4px #f4f4f4; 
+				border-radius: 5px; -moz-border-radius: 5px; -webkit-border-radius: 5px;
+				-webkit-transition: all .2s ease-in-out; -moz-transition: all .2s ease-in-out; -o-transition: all .2s ease-in-out; -ms-transition: all .2s ease-in-out; transition: all .2s ease-in-out; }
+			input[type='submit']:hover, button:hover{ background-color: #777777; }
+			input.placeholder, textarea.placeholder{ color: #aaa; }
+			::selection, ::-moz-selection{ background-color: #535353; color: #fff; }
+
+			.wrapper{ width: 100%; height: 100%; }
+			.header{ position: fixed; top: 0; left: 0; bottom: 0; background-color: #f8f8f8; border-right: solid 2px #e4e4e4;width: 180px; padding: 20px; overflow: auto; }
+			.header ul{  }
+			.header ul li{ margin: 5px 0; list-style: none;}
+			.header ul li a{ text-decoration: none; }
+			.header ul li a:hover{ text-decoration: underline; }
+			.content{ margin: 0 0 0 220px; padding: 20px 20px 20px 50px; max-width: 700px; min-width: 300px; }
+
+			.clear{ clear: both; }
+			.section{ margin: 20px 0; }
+			input.inputTiny , select.inputTiny, textarea.inputTiny{ width: 40px; }
+			input.inputShort, select.inputShort, textarea.inputShort{ width: 75px; }
+			input.inputMed, select.inputMed, textarea.inputMed{ width: 150px; }
+			input.inputLong, select.inputLong, textarea.inputLong{ width: 280px; }
+			input.inputFull, select.inputFull, textarea.inputFull{ width: 100%; }
+			
+			.methoddl dd{ margin-top: 0; }
+			.example-container{ border-bottom: solid 3px #ccc; margin: 0 0 20px 0; padding: 0 0 20px 0; }
+			.example-container button{ border: none; color: #fff; padding: 4px 8px; background-color: #9ec45f; border-radius: 4px; -moz-border-radius: 4px;-webkit-border-radius: 4px; }
+			.ebook{}
+			.ebook img.ebookimg{ float: left; margin: 0 15px 15px 0; width: 100px; }
+			.ebook .buyp a iframe{ margin-bottom: -5px; }
+			
+			dl.dl-options dd{ margin: -18px 0 10 150px; }
+			dl.dl-formatting dd{ margin: -18px 0 10px 80px; }
+			dl.dl-methods > dd{ margin: 5px 0 20px 40px; }
+			dl.dl-methodopts dt{ font-weight: normal; font-style: italic; }
+			dl.dl-methodopts dd{ margin: -18px 0 10px 80px; }
+		</style> 
+		
+		<link rel="stylesheet" media="all" type="text/css" href="Intimidatetime.css" />
+				
+	</head> 
+	<body> 
+		<div class="wrapper">
+			<div class="header">
+				<h1>Intimidatetime - Date Time Picker</h1> 
+
+				<ul class="nav">
+					<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+					<li><a href="#Download" title="Download">Download</a></li>
+					<li><a href="#Options" title="Options">Options</a></li>
+					<li><a href="#Methods" title="Methods">Methods</a></li>
+					<li><a href="#Events" title="Events">Events</a></li>
+					<li><a href="#Formatting" title="Formatting">Formatting</a></li>
+					<li><a href="#I18n" title="Internationalization">Internationalization</a></li>
+					<li><a href="#Examples" title="Examples">Examples</a></li>
+				</ul>
+			</div>
+
+			<div class="content">

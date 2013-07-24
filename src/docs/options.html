@@ -1,0 +1,102 @@
+<!-- ---------------------------------------------- -->
+<!-- ---------------------------------------------- -->
+<div id="Options" class="section">
+	<h2>Options</h2>
+
+	<p>Options are subject to change.  Also visit the <a href="#I18n" title="I18n">I18n</a> for additional options:</p>
+	
+<pre>
+{
+
+	// Date object, array of Date objects, or strict formatted string to set as the value
+	value: null,
+
+	// picker time format
+	previewFormat: null,
+
+	// format shown in the alt field if used, defaults to format option
+	altFormat: null,
+
+	// jQuery element or selector for an alternate input
+	alt: null,
+
+	// min allowed date - date object or relative string '-1M'
+	min: null,
+
+	// max allowed date - date object or relative string '-1M'
+	max: null,
+
+	// number of ranges or pick list of dates, will generate a calendar side by side for each date
+	ranges: 0,
+
+	// string to delimit ranges. this string MUST NOT occur in the time format
+	rangeDelimiter: ' - ',
+
+	// relative date string for the minimum allowed difference between two dates
+	rangeIntervalMin: '+0l',
+
+	// relative date string for the maximum allowed difference between two dates
+	rangeIntervalMax: null,
+
+	// number of months to show at once
+	months: 1,
+
+	// 0-6, which day is the start of the week
+	startOfWeek: 0,
+
+	// whether the picker should be inline
+	inline: false,
+
+	// use theme to prefix all class names, change your css accordingly
+	theme: 'intimidatetime',
+
+	// how the picker is aligned: vertical, horizontal (maps to css styling, no logic). Or should this be "classes"?
+	mode: 'basic',
+
+	// define any and all units
+	units: {
+		year: { map: 'FullYear', type: 'select', range: 20, step: 1, format: 'yyyy', value: null},
+		month: { map: 'Month', type: 'select', min: 0, max: 11, step: 1, format: 'MMM', value: null },
+		day: { map: 'Date', type: 'select', min: 1, max: 31, step: 1, value: null },
+		hour: { map: 'Hours', type: 'select', min: 0, max: 23, step: 1, value: null },
+		minute: { map: 'Minutes', type: 'select', min: 0, max: 59, step: 1, value: null },
+		second: { map: 'Seconds', type: 'select', min: 0, max: 59, step: 1, value: null },
+		milli: { map: 'Milliseconds', type: 'select', min: 0, max: 999, step: 10, value: null },
+		micro: { map: 'Microseconds', type: 'select', min: 0, max: 999, step: 10, value: null },
+		timezone: { map: 'Timezone', type: 'select', value: null, options: [720,660,600,570,540,480,420,360,300,270,240,210,180,120,60, // just like Date.getTimezoneOffset()
+				0,-60,-120,-180,-210,-240,-270,-300,-330,-345,-360,-390,-420,-480,-525,-540,-570,-600,-630,-660,-690,-720,-765,-780,-840],
+				names: {} // Key value pairs mapping timezone values to text values { "-240": "EDT", "-300": "CDT".. }
+			}
+	},
+
+	// the order which each module appears
+	groups: [
+		{ name: 'date', units: ['year', 'month', 'day'] },
+		{ name: 'time', units: ['hour', 'minute', 'second', 'millisecond', 'microsecond', 'timezone'] }
+	],
+
+	// buttons can be added at the bottom of the picker
+	buttons: [
+		//{ text: 'Done', classes: '', tag: 'button', action: function(inst){} }
+	],
+
+	events: {
+		// event fired on value change request, use event.preventDefault() or return false to prevent value change
+		change: function(e, date, inst){},
+
+		// event fired when the picker is (re)built
+		refresh: function(e, inst){},
+
+		// event fired to validate a day, use event.preventDefault() or return false to disable the day
+		enableDay: function(e, date, inst){},
+
+		// event fired when the picker is opened, use event.preventDefault() or return false to prevent opening
+		open: function(e, inst){},
+
+		// event fired when the picker is closed, use event.preventDefault() or return false to prevent closing
+		close: function(e, inst){}
+	}
+}
+</pre>
+
+</div>

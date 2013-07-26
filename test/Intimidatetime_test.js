@@ -35,6 +35,29 @@
 
 	// ########################################################
 	// ########################################################
+	module('Extend utility method');
+	test('extend handles multiple args', function() {
+		expect(2);
+
+		var o1 = { foo: 'foo', bar: 'bar' },
+			o2 = { foo: 'foo2' },
+			o3 = { foo: 'foo3', foobar: 'foobar' },
+			result = $.intimidatetime.extend(o1,o2,o3),
+			compare = { foo: 'foo3', bar: 'bar', foobar: 'foobar' };
+
+		deepEqual(result, compare, "should accept multiple arguments");
+
+		o1 = { foo: { a:1, b:2 }, bar: [1,2,3,4,5] };
+		o2 = { foo: { a: -1, c: 3 } };
+		o3 = { bar: [9,8,7] };
+		result = $.intimidatetime.extend(o1,o2,o3);
+		compare = { foo: { a:-1, b:2, c:3 }, bar: [9,8,7] };
+			
+		deepEqual(result, compare, "should replace arrays, not extend");
+	});
+
+	// ########################################################
+	// ########################################################
 	module('Date prototype additions');
 
 	test('microsecond assignment', function() {

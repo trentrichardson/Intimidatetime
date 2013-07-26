@@ -1,4 +1,4 @@
-/*! Intimidatetime - v0.1.0 - 2013-07-24
+/*! Intimidatetime - v0.1.0 - 2013-07-26
 * http://trentrichardson.com/examples/Intimidatetime
 * Copyright (c) 2013 Trent Richardson; Licensed MIT */
 /*jslint white: true, undef: false, nomen: true */
@@ -42,25 +42,25 @@
 				d = new Date();
 			
 			// apply default options
-			this.settings = $.extend(true, {}, $.intimidatetime.i18n[''], $.intimidatetime.defaults, options);
+			//this.settings = $.extend(true, {}, $.intimidatetime.i18n[''], $.intimidatetime.defaults, options);
+			this.settings = $.intimidatetime.extend({}, $.intimidatetime.i18n[''], $.intimidatetime.defaults, options);
 			s = this.settings;
 
 			// mode engage...
 			if(s.mode !== null && $.intimidatetime.modes[s.mode] !== undefined){
-				$.extend(true, s, $.intimidatetime.modes[s.mode]);
+				$.intimidatetime.extend(s, $.intimidatetime.modes[s.mode]);
 			}
+
+			// picker format defaults to format for input field
+			s.previewFormat = s.previewFormat || s.format;
 			
 			// turn on or off support depending on the format
-			s.support = $.intimidatetime.detectSupport(s.format);			
+			s.support = $.intimidatetime.detectSupport(s.format +' '+ s.previewFormat);			
 			for(k in s.units){
 				if(s.units[k].show === undefined){
 					s.units[k].show = s.support[k];
 				}
 			}
-
-			// picker format defaults to format for input field
-			s.previewFormat = s.previewFormat || s.format;
-
 
 			// find all our elements
 			this.$el = $this;      // the input or container if inline
@@ -415,7 +415,7 @@
 				// get each range
 				inst.$p.children('.'+s.theme+'-range').each(function(i, el){
 					var $r = $(el),
-						v = $.extend({}, defVals),
+						v = $.intimidatetime.extend({},defVals),
 						d;
 					
 					// get each unit in the range
@@ -582,7 +582,7 @@
 				micro: { map: 'Microseconds', type: 'select', min: 0, max: 999, step: 10, value: null },
 				timezone: { map: 'Timezone', type: 'select', value: null, options: [720,660,600,570,540,480,420,360,300,270,240,210,180,120,60, // just like Date.getTimezoneOffset()
 						0,-60,-120,-180,-210,-240,-270,-300,-330,-345,-360,-390,-420,-480,-525,-540,-570,-600,-630,-660,-690,-720,-765,-780,-840],
-						names: {} // Key value pairs mapping timezone values to text values { "-240": "EDT", "-300": "CDT".. }
+						names: {} // Key value pairs mapping timezone values to text values { "240": "EDT", "300": "CDT".. }
 					}
 			},
 
@@ -621,7 +621,7 @@
 		* @return jQuery - the manager object
 		*/
 		setDefaults: function(settings) {
-			$.extend(true, $.intimidatetime.defaults, settings || {});
+			$.intimidatetime.extend($.intimidatetime.defaults, settings || {});
 			return this;
 		},
 
@@ -700,7 +700,7 @@
 							max = u.max,
 							min = u.min,
 							h = '',	
-							moMax, i;
+							moMax, i, l;
 
 						// min/max check
 						if(unit === 'day'){
@@ -719,9 +719,17 @@
 						}
 
 						// build the options
-						for(i=min; i<=max; i+=u.step){
-							tmpd['set'+u.map](i);
-							h += '<option value="'+ i +'">'+ $.intimidatetime.dateFormat(tmpd, u.format, s) +'</option>';
+						if(u.options){
+							for(i=0,l=u.options.length; i<l; i+=1){
+								tmpd['set'+u.map](u.options[i]);
+								h += '<option value="'+ u.options[i] +'">'+ $.intimidatetime.dateFormat(tmpd, u.format, s) +'</option>';
+							}
+						}
+						else{
+							for(i=min; i<=max; i+=u.step){
+								tmpd['set'+u.map](i);
+								h += '<option value="'+ i +'">'+ $.intimidatetime.dateFormat(tmpd, u.format, s) +'</option>';
+							}
 						}
 
 						// build the label
@@ -772,7 +780,7 @@
 		* @return Date
 		*/
 		dateParse: function(date, format, options){
-			var o = $.extend(true, {}, $.intimidatetime.i18n[''], $.intimidatetime.defaults, options || {}),
+			var o = $.intimidatetime.extend({},$.intimidatetime.i18n[''], $.intimidatetime.defaults, options || {}),
 				getAmpmPattern = function(amNames, pmNames) {
 					var markers = [];
 					if (amNames) {
@@ -983,7 +991,7 @@
 		* @return string
 		*/
 		dateFormat: function(date, format, options){
-			var o = $.extend(true, {}, $.intimidatetime.i18n[''], $.intimidatetime.defaults, options || {}),
+			var o = $.intimidatetime.extend({},$.intimidatetime.i18n[''], $.intimidatetime.defaults, options || {}),
 				tmpdate = format,
 				hour = parseInt(date.getHours(), 10),
 				ampm = (hour > 11)? o.units.hour.pm[0] : o.units.hour.am[0],
@@ -1124,7 +1132,8 @@
 
 		/*
 		* Determine by the time format which units are supported
-		* Returns an object of booleans for each unit
+		* @param string - timeFormat to search for tokens
+		* @return object - booleans for each unit
 		*/
 		detectSupport: function(timeFormat){
 			var tf = timeFormat.replace(/\'.*?\'/g,''), // removes literals
@@ -1150,6 +1159,32 @@
 				s.datetime = s.date && s.time;
 
 			return s;
+		},
+
+		/*
+		* create a new object that extend each passed argument object recursively.  Arrays do not merge.
+		* @param object - base object to be extended and returned
+		* @param object - object to extend over base object (one or more)
+		* @return object - all argument objects merged
+		*/
+		extend: function(){
+			var o = arguments[0],
+				i = 1,
+				l = arguments.length,
+				mrec = function(o1, o2){
+						for (var p in o2) {
+							if( o2.hasOwnProperty(p)){
+								o1[p] = (o1[p] === undefined || typeof o2[p] !== 'object' || $.isArray(o2[p])) ? o2[p] : mrec(o1[p], o2[p]);
+							}
+						}
+						return o1;
+					};
+			
+			for(; i<l; i+=1){
+				o = mrec(o, arguments[i]);
+			}
+
+			return o;
 		},
 
 		/*

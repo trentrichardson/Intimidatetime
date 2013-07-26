@@ -18,7 +18,7 @@
 			h1,h2,h3,h4{ color: #777; margin: 10px 0 10px 0; }
 			h1{ color: #000; font-size: 18px; line-height: 22px; margin: 0; }
 			h2{ font-weight: normal; color: #000; margin-left: -25px; font-size: 32px; font-size: 2.2rem;}
-			h3{ font-size: 22px; font-size: 1.4rem; margin: 20px 0 10px 0; }
+			h3{ font-weight: normal; color: #000; margin: 20px 0 10px -25px; font-size: 22px; font-size: 1.4rem; }
 			h4{ padding: 10px 10px; margin: 10px 0; letter-spacing: 1.2px; /* color: #697c9d; */ color: #394c6d; font-size: 16px; }
 			h4 a{ color: #394c6d; text-decoration: none; }
 			p{ text-align: left; font-size: 1rem; line-height: 20px; color: #444444; margin: 5px 0 5px 0; }
@@ -48,6 +48,7 @@
 			.header ul li{ margin: 5px 0; list-style: none;}
 			.header ul li a{ text-decoration: none; }
 			.header ul li a:hover{ text-decoration: underline; }
+			.header ul li ul{ margin: 0 0 0 25px; font-size: 12px; font-size: .8rem; }
 			.content{ margin: 0 0 0 220px; padding: 20px 20px 20px 50px; max-width: 700px; min-width: 300px; }
 
 			.clear{ clear: both; }
@@ -59,7 +60,7 @@
 			input.inputFull, select.inputFull, textarea.inputFull{ width: 100%; }
 			
 			.methoddl dd{ margin-top: 0; }
-			.example-container{ border-bottom: solid 3px #ccc; margin: 0 0 20px 0; padding: 0 0 20px 0; }
+			.example-container{ border-bottom: solid 3px #777; margin: 0 0 20px 0; padding: 0 0 20px 0; }
 			.example-container button{ border: none; color: #fff; padding: 4px 8px; background-color: #9ec45f; border-radius: 4px; -moz-border-radius: 4px;-webkit-border-radius: 4px; }
 			.ebook{}
 			.ebook img.ebookimg{ float: left; margin: 0 15px 15px 0; width: 100px; }
@@ -84,11 +85,22 @@
 					<li><a href="#Introduction" title="Introduction">Introduction</a></li>
 					<li><a href="#Download" title="Download">Download</a></li>
 					<li><a href="#Options" title="Options">Options</a></li>
-					<li><a href="#Methods" title="Methods">Methods</a></li>
+					<li><a href="#Methods" title="Methods">Methods</a>
+							<ul>
+								<li><a href="#Instance-Methods" title="Instance Methods">Instance Methods</a></li>
+								<li><a href="#Utility-Methods" title="Utility Methods">Utility Methods</a></li>
+							</ul>
+						</li>
 					<li><a href="#Events" title="Events">Events</a></li>
 					<li><a href="#Formatting" title="Formatting">Formatting</a></li>
 					<li><a href="#I18n" title="Internationalization">Internationalization</a></li>
-					<li><a href="#Examples" title="Examples">Examples</a></li>
+					<li><a href="#Examples" title="Examples">Examples</a>
+							<ul>
+								<li><a href="#Examples-Basics" title="Basics">Basics</a></li>
+								<li><a href="#Examples-Timezones" title="Timezones">Timezones</a></li>
+								<li><a href="#Examples-Ranges" title="Ranges">Ranges</a></li>
+							</ul>
+						</li>
 				</ul>
 			</div>
 

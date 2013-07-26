@@ -18,7 +18,7 @@
 			h1,h2,h3,h4{ color: #777; margin: 10px 0 10px 0; }
 			h1{ color: #000; font-size: 18px; line-height: 22px; margin: 0; }
 			h2{ font-weight: normal; color: #000; margin-left: -25px; font-size: 32px; font-size: 2.2rem;}
-			h3{ font-size: 22px; font-size: 1.4rem; margin: 20px 0 10px 0; }
+			h3{ font-weight: normal; color: #000; margin: 20px 0 10px -25px; font-size: 22px; font-size: 1.4rem; }
 			h4{ padding: 10px 10px; margin: 10px 0; letter-spacing: 1.2px; /* color: #697c9d; */ color: #394c6d; font-size: 16px; }
 			h4 a{ color: #394c6d; text-decoration: none; }
 			p{ text-align: left; font-size: 1rem; line-height: 20px; color: #444444; margin: 5px 0 5px 0; }
@@ -48,6 +48,7 @@
 			.header ul li{ margin: 5px 0; list-style: none;}
 			.header ul li a{ text-decoration: none; }
 			.header ul li a:hover{ text-decoration: underline; }
+			.header ul li ul{ margin: 0 0 0 25px; font-size: 12px; font-size: .8rem; }
 			.content{ margin: 0 0 0 220px; padding: 20px 20px 20px 50px; max-width: 700px; min-width: 300px; }
 
 			.clear{ clear: both; }
@@ -59,7 +60,7 @@
 			input.inputFull, select.inputFull, textarea.inputFull{ width: 100%; }
 			
 			.methoddl dd{ margin-top: 0; }
-			.example-container{ border-bottom: solid 3px #ccc; margin: 0 0 20px 0; padding: 0 0 20px 0; }
+			.example-container{ border-bottom: solid 3px #777; margin: 0 0 20px 0; padding: 0 0 20px 0; }
 			.example-container button{ border: none; color: #fff; padding: 4px 8px; background-color: #9ec45f; border-radius: 4px; -moz-border-radius: 4px;-webkit-border-radius: 4px; }
 			.ebook{}
 			.ebook img.ebookimg{ float: left; margin: 0 15px 15px 0; width: 100px; }
@@ -84,11 +85,22 @@
 					<li><a href="#Introduction" title="Introduction">Introduction</a></li>
 					<li><a href="#Download" title="Download">Download</a></li>
 					<li><a href="#Options" title="Options">Options</a></li>
-					<li><a href="#Methods" title="Methods">Methods</a></li>
+					<li><a href="#Methods" title="Methods">Methods</a>
+							<ul>
+								<li><a href="#Instance-Methods" title="Instance Methods">Instance Methods</a></li>
+								<li><a href="#Utility-Methods" title="Utility Methods">Utility Methods</a></li>
+							</ul>
+						</li>
 					<li><a href="#Events" title="Events">Events</a></li>
 					<li><a href="#Formatting" title="Formatting">Formatting</a></li>
 					<li><a href="#I18n" title="Internationalization">Internationalization</a></li>
-					<li><a href="#Examples" title="Examples">Examples</a></li>
+					<li><a href="#Examples" title="Examples">Examples</a>
+							<ul>
+								<li><a href="#Examples-Basics" title="Basics">Basics</a></li>
+								<li><a href="#Examples-Timezones" title="Timezones">Timezones</a></li>
+								<li><a href="#Examples-Ranges" title="Ranges">Ranges</a></li>
+							</ul>
+						</li>
 				</ul>
 			</div>
 
@@ -493,7 +505,9 @@ myPicker.on('intimidatetime:change', function(e, date, inst){
 	<p>Formatting your date/time uses special tokens inside a string.  The following are the tokens allowed and their meaning.</p>
 	
 	<dl class="dl-formatting">
-		<dt>U</dt><dd>Unix timestamp</dd>
+		<dt>u</dt><dd>Unix timestamp (seconds)</dd>
+		<!-- <dt>uu</dt><dd>Unix timestamp (seconds with milliseconds behind decimal)</dd>
+		<dt>uuu</dt><dd>Unix timestamp (milliseconds)</dd> -->
 		<dt>yy</dt><dd>Two digit year</dd>
 		<dt>yyyy</dt><dd>Four digit year</dd>
 		<dt>M</dt><dd>Month with no leading 0</dd>
@@ -589,47 +603,202 @@ myPicker.on('intimidatetime:change', function(e, date, inst){
 <div id="Examples" class="section">
 	<h2>Examples</h2>
 					
+
+
+
 	<h3 id="Examples-Basics">Basics</h3>
 					
+
+
+<!-- ---------------------------------------------- -->
 <div class="example-container">
-	<p>A timepicker in the simplest.</p>
+	<p>A timepicker in the simplest fashion.</p>
 	
 	<input type="text" id="ex_basic_1" value="" class="inputFull"/>
 	
 
 <pre class="code">
-$('#ex_basic_1').intimidatetime({
-	ranges: 1,
-	buttons: [
-			{ text: 'Done', action: function(inst){ inst.close(); } }
-		],
-	events: {
-		refresh: function(e,inst){
-			console.log('refreshed', inst.settings);
-		},
-		change: function(e,inst){
-			console.log('changed value');
-		}
-	}
-});
+$('#ex_basic_1').intimidatetime();
 </pre>
 </div>
 
-					
+<!-- ---------------------------------------------- -->
 <div class="example-container">
-	<p>Add a few options, change the format.</p>
+	<p>Add a few options, change the format.  Intimidate time detects which time units are needed by the format.</p>
 	
-	<input type="text" id="ex_basic_2" value="" class="inputLong"/>
+	<input type="text" id="ex_basic_2" value="" class="inputFull"/>
 	
 
 <pre class="code">
 $('#ex_basic_2').intimidatetime({
 	format: 'MMM d, yyyy'
 });
-$('#ex_basic_2').intimidatetime('option','format');
+</pre>
+</div>
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>Use the preview format, this is useful when you need to generate a Unix timestamp.</p>
+	
+	<input type="text" id="ex_basic_3" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_basic_3').intimidatetime({
+	format: 'u',
+	previewFormat: 'yyyy-MM-dd HH:mm:ss'
+});
+</pre>
+</div>
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>You can add on extra functionality by using buttons.  Pass an array of as many as you like.</p>
+	
+	<input type="text" id="ex_basic_4" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_basic_4').intimidatetime({
+	buttons: [
+			{ text: 'Done', action: function(inst){ inst.close(); } }
+		]
+});
 </pre>
 </div>
 
 
-					
+
+
+
+
+	<h3 id="Examples-Timezones">Timezones</h3>
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>You can enable timezones with the "z" format token.</p>
+	
+	<input type="text" id="ex_timezone_1" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_timezone_1').intimidatetime({
+	format: 'yyyy-MM-dd HH:mm z'
+});
+</pre>
 </div>
+					
+
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>Suppose you want the user to have more readable timezone descriptions, but behind the scenes Intimidate time needs the numeric timezone.  We can pass a few timezone options.</p>
+	<p>The option values must be minute offsets from utc.  Just like Date.getTimezoneOffset() the offset for -0400 is 240.  Intimidatetime tries to follow the path laid by javascript.  Then You can assign names to each value.</p>
+	
+	<input type="text" id="ex_timezone_2" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_timezone_2').intimidatetime({
+	format: 'yyyy-MM-dd HH:mm zzz',
+	units: {
+		timezone: {
+			format: 'zzz',
+			options: [240,300,360,420],
+			names: {
+				"240": "EDT", 
+				"300": "CDT", 
+				"360": "MDT",
+				"420": "PDT"
+			}
+		}
+	}
+});
+</pre>
+</div>
+
+
+
+
+
+	<h3 id="Examples-Ranges">Ranges</h3>
+					
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>Ranges are very simple, just use the range option.</p>
+	
+	<input type="text" id="ex_ranges_1" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_ranges_1').intimidatetime({
+	ranges: 1
+});
+</pre>
+</div>				
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>Sometimes maybe you don't want a range necessarily, but a list of dates.  Use the rangeDelimiter and range options together.  Here we request 3 dates.</p>
+	
+	<input type="text" id="ex_ranges_2" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_ranges_2').intimidatetime({
+	format: 'yyyy-MM-dd',
+	ranges: 2,
+	rangeDelimiter: ', '
+});
+</pre>
+</div>
+
+					
+</div><!-- end #Examples -->
+			</div>
+
+			<div class="footer">
+
+			</div>
+		</div>
+
+		<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
+		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
+		<script type="text/javascript" src="Intimidatetime.js"></script>
+		<!-- <script type="text/javascript" src="i18n/Intimidatetime-es.js"></script> -->
+		<script type="text/javascript">
+			
+			$(function(){
+
+				// run the examples
+				$('.example-container').each(function(i,el){
+					var $ex = $(this),
+						$run = $ex.find('.run'),
+						code = $ex.find('.code').text();
+					if($run.length){
+						$run.click(function(e){
+							e.preventDefault();
+							(new Function(code))();
+						});
+					}
+					else{
+						(new Function(code))();
+					}
+				});
+			});
+			
+		</script>
+		
+		<script type="text/javascript">/*
+		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		*/</script>
+		<script type="text/javascript">/*
+		try {
+		var pageTracker = _gat._getTracker("UA-7602218-1");
+		pageTracker._trackPageview();
+		} catch(err) {}*/</script>
+
+	</body>
+</html>

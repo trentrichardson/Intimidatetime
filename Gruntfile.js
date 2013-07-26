@@ -41,7 +41,8 @@ module.exports = function(grunt) {
 						'src/docs/events.html',
 						'src/docs/formatting.html',
 						'src/docs/i18n.html',
-						'src/docs/examples.html'
+						'src/docs/examples.html',
+						'src/docs/footer.html'
 					],
 				dest: 'dist/index.html'
 			}

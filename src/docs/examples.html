@@ -3,47 +3,156 @@
 <div id="Examples" class="section">
 	<h2>Examples</h2>
 					
+
+
+
 	<h3 id="Examples-Basics">Basics</h3>
 					
+
+
+<!-- ---------------------------------------------- -->
 <div class="example-container">
-	<p>A timepicker in the simplest.</p>
+	<p>A timepicker in the simplest fashion.</p>
 	
 	<input type="text" id="ex_basic_1" value="" class="inputFull"/>
 	
 
 <pre class="code">
-$('#ex_basic_1').intimidatetime({
-	ranges: 1,
-	buttons: [
-			{ text: 'Done', action: function(inst){ inst.close(); } }
-		],
-	events: {
-		refresh: function(e,inst){
-			console.log('refreshed', inst.settings);
-		},
-		change: function(e,inst){
-			console.log('changed value');
-		}
-	}
-});
+$('#ex_basic_1').intimidatetime();
 </pre>
 </div>
 
-					
+<!-- ---------------------------------------------- -->
 <div class="example-container">
-	<p>Add a few options, change the format.</p>
+	<p>Add a few options, change the format.  Intimidate time detects which time units are needed by the format.</p>
 	
-	<input type="text" id="ex_basic_2" value="" class="inputLong"/>
+	<input type="text" id="ex_basic_2" value="" class="inputFull"/>
 	
 
 <pre class="code">
 $('#ex_basic_2').intimidatetime({
 	format: 'MMM d, yyyy'
 });
-$('#ex_basic_2').intimidatetime('option','format');
+</pre>
+</div>
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>Use the preview format, this is useful when you need to generate a Unix timestamp.</p>
+	
+	<input type="text" id="ex_basic_3" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_basic_3').intimidatetime({
+	format: 'u',
+	previewFormat: 'yyyy-MM-dd HH:mm:ss'
+});
+</pre>
+</div>
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>You can add on extra functionality by using buttons.  Pass an array of as many as you like.</p>
+	
+	<input type="text" id="ex_basic_4" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_basic_4').intimidatetime({
+	buttons: [
+			{ text: 'Done', action: function(inst){ inst.close(); } }
+		]
+});
 </pre>
 </div>
 
 
-					
+
+
+
+
+	<h3 id="Examples-Timezones">Timezones</h3>
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>You can enable timezones with the "z" format token.</p>
+	
+	<input type="text" id="ex_timezone_1" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_timezone_1').intimidatetime({
+	format: 'yyyy-MM-dd HH:mm z'
+});
+</pre>
 </div>
+					
+
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>Suppose you want the user to have more readable timezone descriptions, but behind the scenes Intimidate time needs the numeric timezone.  We can pass a few timezone options.</p>
+	<p>The option values must be minute offsets from utc.  Just like Date.getTimezoneOffset() the offset for -0400 is 240.  Intimidatetime tries to follow the path laid by javascript.  Then You can assign names to each value.</p>
+	
+	<input type="text" id="ex_timezone_2" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_timezone_2').intimidatetime({
+	format: 'yyyy-MM-dd HH:mm zzz',
+	units: {
+		timezone: {
+			format: 'zzz',
+			options: [240,300,360,420],
+			names: {
+				"240": "EDT", 
+				"300": "CDT", 
+				"360": "MDT",
+				"420": "PDT"
+			}
+		}
+	}
+});
+</pre>
+</div>
+
+
+
+
+
+	<h3 id="Examples-Ranges">Ranges</h3>
+					
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>Ranges are very simple, just use the range option.</p>
+	
+	<input type="text" id="ex_ranges_1" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_ranges_1').intimidatetime({
+	ranges: 1
+});
+</pre>
+</div>				
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>Sometimes maybe you don't want a range necessarily, but a list of dates.  Use the rangeDelimiter and range options together.  Here we request 3 dates.</p>
+	
+	<input type="text" id="ex_ranges_2" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_ranges_2').intimidatetime({
+	format: 'yyyy-MM-dd',
+	ranges: 2,
+	rangeDelimiter: ', '
+});
+</pre>
+</div>
+
+					
+</div><!-- end #Examples -->

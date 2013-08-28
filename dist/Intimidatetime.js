@@ -1,4 +1,4 @@
-/*! Intimidatetime - v0.1.0 - 2013-07-27
+/*! Intimidatetime - v0.1.0 - 2013-08-28
 * http://trentrichardson.com/examples/Intimidatetime
 * Copyright (c) 2013 Trent Richardson; Licensed MIT */
 /*jslint white: true, undef: false, nomen: true */
@@ -113,6 +113,10 @@
 					inst.open();
 				}
 				else{
+					inst.$el.on('keyup.intimidatetime paste.intimidatetime', function(e){ 
+						setTimeout(function(){ inst._inputChange(e); },0); // paste event needs a split second..
+					});
+
 					inst.$el.on('focus.intimidatetime', function(e){ inst.open(); });
 
 					inst.$d.on('click.intimidatetime', function(e){
@@ -338,8 +342,37 @@
 			},
 
 		/* 
-		* the change event has occured on an input, update everything
-		* @return jQuery - the manager object
+		* the change event has occured on the input, update everything
+		* @return jQuery - the input element
+		*/
+		_inputChange: function(e){
+				var inst = this,
+					s =  inst.settings,
+					ranges = $.intimidatetime.dateRangeParse(inst.$el.val(), s.format, s.rangeDelimiter, s),
+					eCustom, eResult;
+				
+				if(ranges && ranges.length === s.ranges+1){
+					eCustom = new $.Event('intimidatetime:change');
+					eResult = inst.$el.trigger(eCustom, [inst, ranges]);
+
+					// do all user supplied event handlers accept the event? (Zepto may not implement this)
+					if(eResult.isDefaultPrevented && eResult.isDefaultPrevented()){	
+						e.preventDefault();
+						return false;
+					}
+
+					// update the picker with this new value 
+					s.value = ranges;
+					inst.refresh();
+				}
+
+				return this.$el;
+			},
+
+
+		/* 
+		* the change event has occured in the picker, update everything
+		* @return jQuery - the input element
 		*/
 		_change: function(e){
 				var inst = this,
@@ -356,7 +389,7 @@
 
 				// set the new value (validation happens in value())
 				inst.value(ranges);
-				return this.$el;
+				return inst.$el;
 			},
 
 		/* 
@@ -690,6 +723,8 @@
 				// dropdowns
 				select: {
 					create: function(inst, $parent, date, onChange){
+						date = (date === undefined || date.toString() === 'Invalid Date')? new Date() : date;
+
 						var s = inst.settings,
 							unit = $parent.data('unit'),
 							u = s.units[unit],
@@ -991,6 +1026,10 @@
 		* @return string
 		*/
 		dateFormat: function(date, format, options){
+			if(date === undefined || date.toString() === "Invalid Date"){
+				return "";
+			}
+
 			var o = $.intimidatetime.extend({},$.intimidatetime.i18n[''], $.intimidatetime.defaults, options || {}),
 				tmpdate = format,
 				hour = parseInt(date.getHours(), 10),

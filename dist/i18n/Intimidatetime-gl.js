@@ -1,24 +1,24 @@
-/* Spanish translation for Intimidatetime */
+/* Galician translation for Intimidatetime */
 (function($) {
-	$.intimidatetime.i18n['es'] = {
+	$.intimidatetime.i18n['gl'] = {
 		format: 'dd/MM/yyyy HH:mm',
 		units: {
 			year: { 
 					format: 'yyyy',
-					label: 'Año'
+					label: 'Ano'
 				},
 			month: { 
 					format: 'MMM',
 					label: 'Mes',
-					names: ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'], 
-					namesAbbr: ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic']
+					names: ['Xaneiro','Febreiro','Marzo','Abril','Maio','Xuño','Xullo','Agosto','Setembro','Outubro','Novembro','Decembro'], 
+					namesAbbr: ['Xan','Feb','Mar','Abr','Mai','Xuñ','Xul','Ago','Set','Out','Nov','Dec']
 				},
 			day: { 
 					format: 'd',
 					label: 'Día',
-					names: ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'],
-					namesAbbr: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-					namesHead: ['Do','Lu','Ma','Mi','Ju','Vi','Sá']
+					names: ['Domingo','Luns','Martes','Mércores','Xoves','Venres','Sábado'],
+					namesAbbr: ['Dom','Lun','Mar','Mér','Xov','Ven','Sáb'],
+					namesHead: ['Do','Lu','Ma','Mé','Xo','Ve','Sá']
 				},
 			hour: {  
 					format: 'HH',
@@ -40,14 +40,14 @@
 				},
 			microsecond: { 
 					format: 'c',
-					label: 'Microsegundos'
+					label: 'Microssegundos'
 				},
 			timezone: { 
 					format: 'z',
-					label: 'Huso horario'
+					label: 'Fuso horario'
 				}
 		},
 		rtl: false
 	};
-	$.intimidatetime.setDefaults($.intimidatetime.i18n['es']);
+	$.intimidatetime.setDefaults($.intimidatetime.i18n['gl']);
 })(window.jQuery || window.Zepto || window.$);

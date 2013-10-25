@@ -53,10 +53,11 @@
 *	MODE: basic
 */
 .intimidatetime-mode-basic {
-  width: 250px;
+  display: inline-block;
 }
 .intimidatetime-mode-basic .intimidatetime-range {
-  border-bottom: solid 1px #e4e4e4;
+  display: inline-block;
+  border-left: solid 1px #e4e4e4;
 }
 .intimidatetime-mode-basic .intimidatetime-range .intimidatetime-preview {
   text-align: center;
@@ -67,7 +68,7 @@
 }
 .intimidatetime-mode-basic .intimidatetime-range .intimidatetime-group .intimidatetime-unit {
   display: inline-block;
-  width: 33%;
+  padding-right: 5px;
 }
 .intimidatetime-mode-basic .intimidatetime-range .intimidatetime-group .intimidatetime-unit span {
   display: block;

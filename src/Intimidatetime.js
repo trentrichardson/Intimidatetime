@@ -268,7 +268,7 @@
 				inst.$p.empty();
 				for(i=0; i<=s.ranges; i+=1){
 					$h = $('<div class="'+s.theme+'-range '+s.theme+'-range-'+i+'"><div class="'+s.theme+'-preview">'+ $.intimidatetime.dateFormat(s.value[i], s.previewFormat, s) +'</div></div>').appendTo(inst.$p);
-
+					
 					// build out the defined groups
 					for(g=0,gl=s.groups.length; g<gl; g+=1){
 						gv = s.groups[g];
@@ -278,7 +278,7 @@
 							jv = gv.units[j];
 							if(s.support[jv]){
 								numUnits++;
-								$tmp2 = $('<div class="'+s.theme+'-unit '+s.theme+'-unit-'+ jv +'" data-range="'+ i +'" data-unit="'+ jv +'"></div>').appendTo($tmp1);
+								$tmp2 = $('<div class="'+s.theme+'-unit '+s.theme+'-unit-'+ jv +'" data-range="'+ i +'" data-unit="'+ jv +'"></div>').appendTo($tmp1);								
 								$.intimidatetime.types[s.units[jv].type].create(inst, $tmp2, s.value[i]);
 							}
 						} // end units
@@ -318,14 +318,21 @@
 				var inst = this,
 					elpos = inst.$el.position(),
 					outerSize = function($el){
-							return {
-								w: ($el.width() + $el.css('padding-left') + $el.css('padding-right') + $el.css('border-left-width') + $el.css('border-right-width')),
-								h: ($el.height() + $el.css('padding-top') + $el.css('padding-bottom') + $el.css('border-top-width') + $el.css('border-bottom-width'))
-							};
+							var s = { w: $el.width(), h: $el.height() },
+								p = function(c){
+									var v = $el.css(c);
+									return v ? v.replace('px','')*1 : 0;
+								};
+							
+							//if($el.css('box-sizing') !== 'border-box'){
+								s.w += p('padding-left') + p('padding-right') + p('border-left-width') + p('border-right-width');
+								s.h += p('padding-top') + p('padding-bottom') + p('border-top-width') + p('border-bottom-width');
+							//}
+							return s;
 						},
 					els = outerSize(inst.$el),
 					ps = outerSize(inst.$p),
-					docs = { w: inst.$d.width(), h: inst.$d.height() },
+					docs = outerSize($(document.body)),
 					top = elpos.top + els.h,
 					left = elpos.left;
 
@@ -340,7 +347,7 @@
 				if((left + ps.w) > docs.w){
 					left = docs.w - ps.w;
 				}
-
+				
 				inst.$p.css({ top: top, left: left });
 				
 				return inst.$el;
@@ -741,7 +748,7 @@
 							min = u.min,
 							h = '',	
 							moMax, i, l;
-
+						
 						// min/max check
 						if(unit === 'day'){
 							moMax = $.intimidatetime.daysInMonth(date.getMonth(), date.getFullYear());
@@ -1249,7 +1256,12 @@
 		*/
 		lookup: {
 			i: 0
-		}
+		},
+		
+		/*
+		* Current version number of this plugin
+		*/
+		version: '@@version'
 	});
 
 

@@ -74,6 +74,22 @@ module.exports = function(grunt) {
 				dest: 'dist/<%= pkg.name %>.min.css'
 			},
 		},
+		replace: {
+			dist: {
+				options: {
+					variables: {
+						version: '<%= pkg.version %>',
+						timestamp: '<%= grunt.template.today("yyyy-mm-dd") %>'
+					},
+					prefix: '@@'
+				},
+				files: [
+					{ src: 'dist/<%= pkg.name %>.js', dest: 'dist/<%= pkg.name %>.js' },
+					{ src: 'dist/<%= pkg.name %>.css', dest: 'dist/<%= pkg.name %>.css' },
+					{ src: 'dist/index.html', dest: 'dist/index.html' }
+				]
+			}
+		},
 		qunit: {
 			files: ['test/**/*.html']
 		},
@@ -104,7 +120,7 @@ module.exports = function(grunt) {
 			},
 			src: {
 				files: 'src/**',//'<%= jshint.src.src %>',
-				tasks: ['jshint:src', 'clean', 'less', 'copy', 'concat', 'uglify', 'cssmin']
+				tasks: ['jshint:src', 'clean', 'less', 'copy', 'concat', 'replace', 'uglify', 'cssmin']
 			},
 			test: {
 				files: '<%= jshint.test.src %>',
@@ -118,6 +134,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-concat');
 	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-less');
+	grunt.loadNpmTasks('grunt-replace');
 	grunt.loadNpmTasks('grunt-contrib-uglify');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-qunit');
@@ -125,6 +142,6 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task.
-	grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'less', 'copy', 'concat', 'uglify', 'cssmin']);
+	grunt.registerTask('default', ['jshint', 'qunit', 'clean', 'less', 'copy', 'concat', 'replace', 'uglify', 'cssmin']);
 
 };

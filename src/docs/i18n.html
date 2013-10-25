@@ -6,7 +6,7 @@
 	<p>Intimidate time comes with full support for i18n.  You can create your own or use the pre-built ones in the i18n directory by simply including it in your page.</p>
 
 <pre>
-{
+$.intimidatetime.i18n['en'] = {
 	format: 'yyyy-MM-dd HH:mm',      // default format 'yyyy-MM-dd hh:mm:ss:l tt z'
 	units: {
 		year: { 
@@ -54,7 +54,8 @@
 			}
 	},
 	rtl: false
-}
+};
+$.intimidatetime.setDefaults($.intimidatetime.i18n['en']);
 </pre>
 
 </div>

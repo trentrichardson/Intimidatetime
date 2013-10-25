@@ -5,13 +5,25 @@
 			</div>
 		</div>
 
-		<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script> -->
+		<!-- <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.2.min.js"></script> -->
 		<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/zepto/1.0/zepto.min.js"></script>
 		<script type="text/javascript" src="Intimidatetime.js"></script>
 		<!-- <script type="text/javascript" src="i18n/Intimidatetime-es.js"></script> -->
 		<script type="text/javascript">
 			
 			$(function(){
+				// quick routine for scrolling nav
+				var $nav = $('.header ul.nav'),
+					navoffset = $nav.offset(),
+					$navclone = $nav.clone().addClass('scrollnav').appendTo('.header'),
+					$window = $(window);
+				$window.scroll(function(e){
+					if((navoffset.top+50) < $window.scrollTop()){
+						if(!$navclone.hasClass('scrolled'))
+							$navclone.addClass('scrolled');
+					}
+					else $navclone.removeClass('scrolled');
+				}).scroll();
 
 				// run the examples
 				$('.example-container').each(function(i,el){
@@ -31,6 +43,8 @@
 			});
 			
 		</script>
+		
+		<script type="text/javascript" src="https://sellfy.com/js/api_buttons.js"></script>
 		
 		<script type="text/javascript">/*
 		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

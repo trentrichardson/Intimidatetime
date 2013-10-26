@@ -38,7 +38,7 @@ I also recommend getting the eBook [Handling Time](https://sellfy.com/p/8gxZ).  
 
 1) Much like jQueryUI Timepicker Addon, Intimidatetime has a control type abstraction (select dropdown, label, list).  List is not yet implemented, but it should generate clickable links to set the value.  This will implement the calendar grid for the "day" selection, and simply a list of links for the other units.  The type is specified in the option for unites.day.type.
 
-2) Once the control type for list is working there is a modes functionality.  Modes are groups of presets.  So if you want all select boxes, you could have a modes for those
+2) Once the control type for list is working there is a modes functionality.  Modes are groups of presets.  So if you want all select boxes, you could have a modes for those.
 
 3) I18N improvements.  If you are fluent in a language other than English, please help.  It only takes a couple minutes.
 

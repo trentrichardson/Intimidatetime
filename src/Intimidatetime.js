@@ -1041,7 +1041,7 @@
 			if(date === undefined || date.toString() === "Invalid Date"){
 				return "";
 			}
-
+			
 			var o = $.intimidatetime.extend({},$.intimidatetime.i18n[''], $.intimidatetime.defaults, options || {}),
 				tmpdate = format,
 				hour = parseInt(date.getHours(), 10),
@@ -1074,7 +1074,7 @@
 				tzLabel = function(tz){
 					return o.units.timezone.names[tz] || tzStr(tz,false);
 				};
-
+			
 			tmpdate = tmpdate.replace(/(?:u{1,3}|yyyy|yy|M{1,4}|d{1,4}|HH?|hh?|mm?|ss?|[tT]{1,2}|z{1,3}|[lc]|('.*?'|".*?"))/g, function(match) {
 				var r='';
 				switch (match) {

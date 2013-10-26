@@ -147,7 +147,7 @@
 
 	<h3>Version</h3>
 	<p>Version 0.1.0</p>
-	<p>Last updated on 2013-10-25</p>
+	<p>Last updated on 2013-10-26</p>
 
 	<h3>License</h3>
 	<p>Intimidatetime is currently available for use in all personal or commercial projects under the MIT license.</p>
@@ -669,7 +669,8 @@ $('#ex_basic_3').intimidatetime({
 <pre class="code">
 $('#ex_basic_4').intimidatetime({
 	buttons: [
-			{ text: 'Done', action: function(inst){ inst.close(); } }
+			{ text: 'Done', action: function(inst){ inst.close(); } },
+			{ text: 'Now', action: function(inst){ inst.value( new Date() ); } }
 		]
 });
 </pre>

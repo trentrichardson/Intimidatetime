@@ -37,6 +37,49 @@
 .intimidatetime.intimidatetime-inline {
   position: static;
 }
+.intimidatetime .intimidatetime-unit-select {
+  display: inline-block;
+  padding-right: 5px;
+}
+.intimidatetime .intimidatetime-unit-select span {
+  display: block;
+}
+.intimidatetime .intimidatetime-unit-list {
+  display: block;
+}
+.intimidatetime .intimidatetime-unit-list .unit-list {
+  list-style: none;
+  max-width: 200px;
+  margin: 0;
+}
+.intimidatetime .intimidatetime-unit-list .unit-list li {
+  display: inline-block;
+}
+.intimidatetime .intimidatetime-unit-list .unit-list li a {
+  display: inline-block;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  border-radius: 4px;
+  -moz-background-clip: padding;
+  -webkit-background-clip: padding-box;
+  background-clip: padding-box;
+  background-color: #eeeeee;
+  color: #333333;
+  text-decoration: none;
+  padding: 6px 12px;
+  margin: 0 4px 0 0;
+}
+.intimidatetime .intimidatetime-unit-list .unit-list li a.selected {
+  background-color: #cccccc;
+  color: #333333;
+}
+.intimidatetime .intimidatetime-unit-list .unit-list li a:hover,
+.intimidatetime .intimidatetime-unit-list .unit-list li a:active {
+  background-color: #dddddd;
+  color: #333333;
+}
 .intimidatetime .intimidatetime-buttons {
   padding: 10px;
 }
@@ -65,11 +108,4 @@
 }
 .intimidatetime-mode-basic .intimidatetime-range .intimidatetime-group {
   padding: 5px 10px;
-}
-.intimidatetime-mode-basic .intimidatetime-range .intimidatetime-group .intimidatetime-unit {
-  display: inline-block;
-  padding-right: 5px;
-}
-.intimidatetime-mode-basic .intimidatetime-range .intimidatetime-group .intimidatetime-unit span {
-  display: block;
 }

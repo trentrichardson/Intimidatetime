@@ -14,6 +14,13 @@
 @font-color: #555;
 @line-height: 18px;
 
+@list-item-bg: #eee;
+@list-item-selected-bg: #ccc;
+@list-item-hover-bg: #ddd;
+@list-item-color: #333;
+@list-item-selected-color: #333;
+@list-item-hover-color: #333;
+
 /* ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 *	Mixins
 */
@@ -76,6 +83,49 @@
 		position: static;
 	}
 
+	// select control type
+	.intimidatetime-unit-select{
+		display: inline-block;
+		padding-right: 5px;
+
+		span{
+			display: block;
+		}
+	}
+
+	// list control type
+	.intimidatetime-unit-list{
+		display: block;
+		.unit-list{
+			list-style: none;
+			max-width: 200px;
+			margin: 0;
+			li{
+				display: inline-block;
+				a{
+					display: inline-block;
+					.border-radius(4px);
+					background-color: @list-item-bg;
+					color: @list-item-color;
+					text-decoration: none;
+					padding: 6px 12px;
+					margin: 0 4px 0 0;
+					
+					&.selected{
+						background-color: @list-item-selected-bg;
+						color: @list-item-selected-color;
+					}
+
+					&:hover,
+					&:active{
+						background-color: @list-item-hover-bg;
+						color: @list-item-hover-color;
+					}
+				}
+			}
+		}
+	}
+
 	// buttons
 	.intimidatetime-buttons{
 		padding: 10px;
@@ -110,14 +160,14 @@
 		.intimidatetime-group{
 			padding: 5px 10px;
 
-			.intimidatetime-unit{
-				display: inline-block;
-				padding-right: 5px;
+			// .intimidatetime-unit{
+			// 	display: inline-block;
+			// 	padding-right: 5px;
 
-				span{
-					display: block;
-				}
-			} // end unit
+			// 	span{
+			// 		display: block;
+			// 	}
+			// } // end unit
 		} // end group
 	} // end range
 } // end basic

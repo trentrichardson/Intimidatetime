@@ -147,7 +147,7 @@
 
 	<h3>Version</h3>
 	<p>Version 0.1.0</p>
-	<p>Last updated on 2013-10-26</p>
+	<p>Last updated on 2013-10-31</p>
 
 	<h3>License</h3>
 	<p>Intimidatetime is currently available for use in all personal or commercial projects under the MIT license.</p>
@@ -672,6 +672,25 @@ $('#ex_basic_4').intimidatetime({
 			{ text: 'Done', action: function(inst){ inst.close(); } },
 			{ text: 'Now', action: function(inst){ inst.value( new Date() ); } }
 		]
+});
+</pre>
+</div>
+
+
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>You can change input types using the units.{unit type}.type option.</p>
+	
+	<input type="text" id="ex_basic_5" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_basic_5').intimidatetime({
+	format: 'MMM yyyy',
+	units: {
+		year: { type: 'list', options: [2013,2014,2015] },
+		month: { type: 'list', format: 'MMMM' }
+	}
 });
 </pre>
 </div>

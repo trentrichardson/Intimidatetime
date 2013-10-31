@@ -69,6 +69,25 @@ $('#ex_basic_4').intimidatetime({
 </div>
 
 
+<!-- ---------------------------------------------- -->
+<div class="example-container">
+	<p>You can change input types using the units.{unit type}.type option.</p>
+	
+	<input type="text" id="ex_basic_5" value="" class="inputFull"/>
+	
+
+<pre class="code">
+$('#ex_basic_5').intimidatetime({
+	format: 'MMM yyyy',
+	units: {
+		year: { type: 'list', options: [2013,2014,2015] },
+		month: { type: 'list', format: 'MMMM' }
+	}
+});
+</pre>
+</div>
+
+
 
 
 

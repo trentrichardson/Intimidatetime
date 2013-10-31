@@ -50,7 +50,7 @@
 			//this.settings = $.extend(true, {}, $.intimidatetime.i18n[''], $.intimidatetime.defaults, options);
 			this.settings = $.intimidatetime.extend({}, $.intimidatetime.i18n[''], $.intimidatetime.defaults, options);
 			s = this.settings;
-
+			
 			// mode engage...
 			if(s.mode !== null && $.intimidatetime.modes[s.mode] !== undefined){
 				$.intimidatetime.extend(s, $.intimidatetime.modes[s.mode]);
@@ -263,7 +263,7 @@
 						inst.$el.after(inst.$p);
 					}
 				}
-
+				
 				// create a set for each datetime in a range
 				inst.$p.empty();
 				for(i=0; i<=s.ranges; i+=1){
@@ -278,7 +278,7 @@
 							jv = gv.units[j];
 							if(s.support[jv]){
 								numUnits++;
-								$tmp2 = $('<div class="'+s.theme+'-unit '+s.theme+'-unit-'+ jv +'" data-range="'+ i +'" data-unit="'+ jv +'"></div>').appendTo($tmp1);								
+								$tmp2 = $('<div class="'+ s.theme +'-unit '+ s.theme +'-unit-'+ s.units[jv].type +' '+ s.theme+'-unit-'+ jv +'" data-range="'+ i +'" data-unit="'+ jv +'"></div>').appendTo($tmp1);								
 								$.intimidatetime.types[s.units[jv].type].create(inst, $tmp2, s.value[i]);
 							}
 						} // end units
@@ -722,13 +722,88 @@
 				// list of clickable links (or calendar for months) (uses hidden inputs)
 				list: {
 					create: function(inst, $parent, date, onChange){
-						window.console.log('create list');
+						date = (date === undefined || date.toString() === 'Invalid Date')? new Date() : date;
+
+						var s = inst.settings,
+							unit = $parent.data('unit'),
+							u = s.units[unit],
+							$label = $('<label class="unit-label unit-label-'+ unit +'"></label>'),
+							$input = $('<input type="hidden" class="unit-input unit-input-'+ unit +'" value="" />'),							
+							$list = $('<ul class="unit-list unit-list-'+ unit +'"></ul>'),
+							val = date['get'+u.map](), 
+							tmpd = $.intimidatetime.dateClone(date),
+							max = u.max,
+							min = u.min,
+							h = '',	
+							moMax, i, l;
+						
+						// because some months have diff number of days...
+						if(unit === 'year' || unit === 'month'){
+							date.setDate(1);
+							tmpd.setDate(1);
+							val = date['get'+u.map]();
+						}
+
+						// min/max check
+						if(unit === 'day'){
+							moMax = $.intimidatetime.daysInMonth(date.getMonth(), date.getFullYear());
+							if(moMax < max){
+								max = moMax;
+							}
+						}
+						if(u.range !== undefined){
+							if(min === undefined){
+								min = date.getFullYear()-u.range;
+							}
+							if(max === undefined){
+								max = date.getFullYear()+u.range;
+							}
+						}
+
+						// build the options
+						if(u.options){
+							for(i=0,l=u.options.length; i<l; i+=1){
+								tmpd['set'+u.map](u.options[i]);
+								h += '<li><a href="#" data-value="'+ u.options[i] +'" class="'+ (u.options[i]===val? 'selected':'') +'">'+ $.intimidatetime.dateFormat(tmpd, u.format, s) +'</a></li>';
+							}
+						}
+						else{
+							for(i=min; i<=max; i+=u.step){
+								tmpd['set'+u.map](i);
+								h += '<li><a href="#" data-value="'+ i +'" class="'+ (i===val? 'selected':'') +'">'+ $.intimidatetime.dateFormat(tmpd, u.format, s) +'</a></li>';
+							}
+						}
+
+						// build the label
+						if(u.label !== '' && u.label !== false){
+							$label.append('<span>'+ u.label +'</span>');
+						}
+
+						// append it all to the parent
+						$input.val(val);						
+						$list.on('click.intimidatetime','a', function(e){ // select change event triggers the change
+							e.preventDefault();
+							$list.find('a.selected').removeClass('selected');
+							$input.val($(this).addClass('selected').data('value'));
+							inst._change.call(inst, e);
+						});
+						$label.append($input).appendTo($parent);
+						$list.html(h).appendTo($parent);
 					},
 					option: function(inst, $parent, key, val){
 
 					},
 					value: function(inst, $parent, val){
+						var $sel = $parent.find('input');
 
+						//$parent.find('ul li a.selected').removeClass('selected');
+						//$parent.find('a[data-value='+val+']').addClass('selected');
+
+						if(val !== undefined){
+							$sel.val(val);
+							return $parent;
+						}
+						return $sel.val();
 					}
 				},
 
@@ -747,8 +822,15 @@
 							max = u.max,
 							min = u.min,
 							h = '',	
-							moMax, i, l;
+							moMax, i, l;	
 						
+						// because some months have diff number of days...
+						if(unit === 'year' || unit === 'month'){
+							date.setDate(1);
+							tmpd.setDate(1);
+							val = date['get'+u.map]();
+						}					
+
 						// min/max check
 						if(unit === 'day'){
 							moMax = $.intimidatetime.daysInMonth(date.getMonth(), date.getFullYear());
@@ -1223,9 +1305,27 @@
 				i = 1,
 				l = arguments.length,
 				mrec = function(o1, o2){
-						for (var p in o2) {
-							if( o2.hasOwnProperty(p)){
-								o1[p] = (o1[p] === undefined || typeof o2[p] !== 'object' || $.isArray(o2[p])) ? o2[p] : mrec(o1[p], o2[p]);
+						var p, t, v;
+						for (p in o2) {
+							if(o2.hasOwnProperty(p)){
+								v = o2[p];
+								t = Object.prototype.toString.call(v); 
+								if(t === '[object Date]'){ // Date, make a clone
+									o1[p] = $.intimidatetime.dateClone(v);
+								}
+								else if(t === '[object Array]'){ // Array, make a copy, and completely replace previous
+									o1[p] = mrec([], v); 
+								}
+								else if(t !== '[object Object]' || v === null){ // simple value, completely replace
+									o1[p] = v;
+								}
+								else if(o1[p] !== undefined){ // must be an obj, prev value exists so merge
+									o1[p] = mrec(o1[p], v);
+								}
+								else{ // no previous value so make a copy
+									o1[p] = mrec({}, v); // make a copy
+								}
+								
 							}
 						}
 						return o1;

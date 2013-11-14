@@ -287,7 +287,7 @@
 						}
 					} // end groups
 				} // end ranges
-
+				
 				// add any buttons: Done, Now, etc
 				jl = s.buttons.length;
 				if(jl > 0){
@@ -296,6 +296,7 @@
 						jv = s.buttons[j];
 						jv.tag = jv.tag || 'button';
 						jv.classes = jv.classes || '';
+						
 						$tmp2 = $('<'+ jv.tag +' href="javascript:void();" class="'+ jv.classes +'">'+ jv.text +'</'+ jv.tag +'>')
 									.on('click.intimidatetime', function(e){ e.preventDefault(); jv.action.call(inst,inst); } )
 									.appendTo($tmp1);

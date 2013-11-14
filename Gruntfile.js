@@ -8,6 +8,7 @@ module.exports = function(grunt) {
 		pkg: grunt.file.readJSON('Intimidatetime.jquery.json'),
 		banner: '/*! <%= pkg.title || pkg.name %> - v<%= pkg.version %>' +
 			//' - <%= grunt.template.today("yyyy-mm-dd") %>\n' +
+			' - <%= pkg.modified %>\n' +
 			'<%= pkg.homepage ? "* " + pkg.homepage + "\\n" : "" %>' +
 			'* Copyright (c) <%= grunt.template.today("yyyy") %> <%= pkg.author.name %>;' +
 			' Licensed <%= _.pluck(pkg.licenses, "type").join(", ") %> */\n',
@@ -79,7 +80,7 @@ module.exports = function(grunt) {
 				options: {
 					variables: {
 						version: '<%= pkg.version %>',
-						timestamp: '<%= grunt.template.today("yyyy-mm-dd") %>'
+						timestamp: '<%= pkg.modified %>'//'<%= grunt.template.today("yyyy-mm-dd") %>'
 					},
 					prefix: '@@'
 				},

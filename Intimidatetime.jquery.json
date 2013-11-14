@@ -2,7 +2,8 @@
 	"name": "Intimidatetime",
 	"title": "Intimidatetime",
 	"description": "A wicked good date time picker for jQuery and Zepto",
-	"version": "0.1.0",
+	"version": "0.2.0",
+	"modified": "2013-11-14",
 	"homepage": "http://trentrichardson.com/examples/Intimidatetime",
 	"author": {
 		"name": "Trent Richardson",

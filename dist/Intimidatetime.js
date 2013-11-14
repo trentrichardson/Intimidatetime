@@ -1,4 +1,5 @@
-/*! Intimidatetime - v0.1.0* http://trentrichardson.com/examples/Intimidatetime
+/*! Intimidatetime - v0.2.0 - 2013-11-14
+* http://trentrichardson.com/examples/Intimidatetime
 * Copyright (c) 2013 Trent Richardson; Licensed MIT */
 /*jslint white: true, undef: false, nomen: true */
 (function($){
@@ -281,7 +282,7 @@
 						}
 					} // end groups
 				} // end ranges
-
+				
 				// add any buttons: Done, Now, etc
 				jl = s.buttons.length;
 				if(jl > 0){
@@ -290,6 +291,7 @@
 						jv = s.buttons[j];
 						jv.tag = jv.tag || 'button';
 						jv.classes = jv.classes || '';
+						
 						$tmp2 = $('<'+ jv.tag +' href="javascript:void();" class="'+ jv.classes +'">'+ jv.text +'</'+ jv.tag +'>')
 									.on('click.intimidatetime', function(e){ e.preventDefault(); jv.action.call(inst,inst); } )
 									.appendTo($tmp1);
@@ -1355,7 +1357,7 @@
 		/*
 		* Current version number of this plugin
 		*/
-		version: '0.1.0'
+		version: '0.2.0'
 	});
 
 

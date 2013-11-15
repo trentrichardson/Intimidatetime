@@ -667,10 +667,16 @@ $('#ex_basic_3').intimidatetime({
 	
 
 <pre class="code">
-$('#ex_basic_4').intimidatetime({
+var $basicEx4 = $('#ex_basic_4').intimidatetime({
 	buttons: [
-			{ text: 'Done', action: function(inst){ inst.close(); } },
-			{ text: 'Now', action: function(inst){ inst.value( new Date() ); } }
+			{ 
+				text: 'Done', 
+				action: function(e){ $basicEx4.intimidatetime('close'); return false; } 
+			},
+			{ 
+				text: 'Now', 
+				action: function(e){ $basicEx4.intimidatetime('value', new Date() ); return false; }
+			}
 		]
 });
 </pre>

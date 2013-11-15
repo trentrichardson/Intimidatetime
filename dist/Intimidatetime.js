@@ -292,9 +292,10 @@
 						jv.tag = jv.tag || 'button';
 						jv.classes = jv.classes || '';
 						
-						$tmp2 = $('<'+ jv.tag +' href="javascript:void();" class="'+ jv.classes +'">'+ jv.text +'</'+ jv.tag +'>')
-									.on('click.intimidatetime', function(e){ e.preventDefault(); jv.action.call(inst,inst); } )
-									.appendTo($tmp1);
+						$('<'+ jv.tag +' href="javascript:void();" class="'+ s.theme+'-button-'+ j +' '+ jv.classes +'">'+ jv.text +'</'+ jv.tag +'>')
+								//.on('click.intimidatetime', { instance: inst }, jv.action) // not with Zepto, lack of data parameter
+								.on('click.intimidatetime', jv.action)
+								.appendTo($tmp1);
 					}
 				}
 				

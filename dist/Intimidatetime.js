@@ -1,4 +1,4 @@
-/*! Intimidatetime - v0.2.0 - 2014-07-08
+/*! Intimidatetime - v0.3.0 - 2014-07-08
 * http://trentrichardson.com/examples/Intimidatetime
 * Copyright (c) 2014 Trent Richardson; Licensed MIT */
 /*jslint white: true, undef: false, nomen: true */
@@ -1358,7 +1358,7 @@
 		/*
 		* Current version number of this plugin
 		*/
-		version: '0.2.0'
+		version: '0.3.0'
 	});
 
 

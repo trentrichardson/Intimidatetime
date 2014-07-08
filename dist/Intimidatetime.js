@@ -1,6 +1,6 @@
 /*! Intimidatetime - v0.2.0 - 2013-11-14
 * http://trentrichardson.com/examples/Intimidatetime
-* Copyright (c) 2013 Trent Richardson; Licensed MIT */
+* Copyright (c) 2014 Trent Richardson; Licensed MIT */
 /*jslint white: true, undef: false, nomen: true */
 (function($){
 	'use strict';

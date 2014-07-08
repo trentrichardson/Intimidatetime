@@ -1,0 +1,10 @@
+{
+	"name": "Intimidatetime",
+	"version": "0.2.0",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/trentrichardson/Intimidatetime.git"
+	},
+	"dependencies": {
+	}
+}

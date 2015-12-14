@@ -5,6 +5,7 @@
 		"type": "git",
 		"url": "git://github.com/trentrichardson/Intimidatetime.git"
 	},
+	"license": "MIT",
 	"dependencies": {
 	}
 }

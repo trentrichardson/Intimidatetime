@@ -15,7 +15,7 @@
 				},
 			day: { 
 					format: 'd',
-					label: 'Journée',
+					label: 'Jour',
 					names: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
 					namesAbbr: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.'],
 					namesHead: ['D','L','M','M','J','V','S']

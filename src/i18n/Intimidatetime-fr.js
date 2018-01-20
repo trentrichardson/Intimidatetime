@@ -10,12 +10,12 @@
 			month: { 
 					format: 'MMM',
 					label: 'Mois',
-					names: ['Tammikuu','Helmikuu','Maaliskuu','Huhtikuu','Toukokuu','Kesäkuu','Heinäkuu','Elokuu','Syyskuu','Lokakuu','Marraskuu','Joulukuu'], 
-					namesAbbr: ['Tammi','Helmi','Maalis','Huhti','Touko','Kesä','Heinä','Elo','Syys','Loka','Marras','Joulu']
+					names: ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'],
+					namesAbbr: ['Jan','Fev','Mar','Avr','Mai','Jun','Jul','Aou','Sep','Oct','Nov','Dec']
 				},
 			day: { 
 					format: 'd',
-					label: 'Journée',
+					label: 'Jour',
 					names: ['Dimanche','Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi'],
 					namesAbbr: ['Dim.','Lun.','Mar.','Mer.','Jeu.','Ven.','Sam.'],
 					namesHead: ['D','L','M','M','J','V','S']
